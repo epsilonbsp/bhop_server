@@ -39,24 +39,10 @@ if "%~1" == "install" (
         del sourcemod.zip
 
         cd addons\sourcemod
-        curl -L -o eventqueuefix.zip https://github.com/hermansimensen/eventqueue-fix/releases/download/1.3.2/eventqueuefix-1.3.2.zip
-        tar -xf eventqueuefix.zip
-        del eventqueuefix.zip
-        cd ../..
-
-        curl -L -o eventqueuefixfix.zip https://github.com/srcwr/eventqueuefixfix/releases/download/v1.0.1/eventqueuefixfix-v1.0.1-def5b0e-windows-x32.zip
-        tar -xf eventqueuefixfix.zip
-        del eventqueuefixfix.zip
-
-        cd addons\sourcemod
         curl -L https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip -o dynamicchannels.zip
         tar -xf dynamicchannels.zip --strip-components=1
         del dynamicchannels.zip
         cd ../..
-
-        curl -L -o srcwrfloppy.zip https://github.com/srcwr/srcwrfloppy/releases/download/v4.0.0/srcwrfloppy-v4.0.0.zip
-        tar -xf srcwrfloppy.zip
-        del srcwrfloppy.zip
 
         curl -L -o tickrateenabler.zip https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
         tar -xf tickrateenabler.zip --strip-components=1
