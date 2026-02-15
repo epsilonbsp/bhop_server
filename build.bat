@@ -57,6 +57,7 @@ if "%~1" == "build" (
     xcopy "plugins\bhoptimer\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\jumpstats\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\landfix\*" "build\game\cstrike\" /E /H /C /Y
+    xcopy "plugins\pushfix\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\rngfix\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\showplayerclips\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\showtriggers\*" "build\game\cstrike\" /E /H /C /Y

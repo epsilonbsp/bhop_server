@@ -21,6 +21,9 @@
     https://github.com/Haze1337/Landfix/releases
     https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
 
+    https://forums.alliedmods.net/showthread.php?p=2323671
+    https://forums.alliedmods.net/attachment.php?attachmentid=146798&d=1437770252
+
     https://github.com/jason-e/rngfix/releases
     https://github.com/jason-e/rngfix/archive/refs/tags/v1.1.3.zip
 
