@@ -1,0 +1,67 @@
+@echo off
+
+cls
+
+if "%~1" == "install" (
+    if not exist build mkdir build
+    cd build
+
+    if not exist steamcmd (
+        mkdir steamcmd
+        cd steamcmd
+
+        curl -O https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+        tar -xf steamcmd.zip
+        del steamcmd.zip
+
+        .\steamcmd.exe +login anonymous +logout +quit
+
+        cd ..
+    )
+
+    if not exist game (
+        cd steamcmd
+
+        .\steamcmd.exe +force_install_dir ../game +login anonymous +app_update 232330 validate +logout +quit
+
+        cd ..
+    )
+
+    if not exist game\cstrike\addons (
+        cd game\cstrike
+
+        curl -L -o mmsource.zip https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-windows.zip
+        tar -xf mmsource.zip
+        del mmsource.zip
+
+        curl -L -o sourcemod.zip https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip
+        tar -xf sourcemod.zip
+        del sourcemod.zip
+
+        cd addons\sourcemod
+        curl -L -o eventqueuefix.zip https://github.com/hermansimensen/eventqueue-fix/releases/download/1.3.2/eventqueuefix-1.3.2.zip
+        tar -xf eventqueuefix.zip
+        del eventqueuefix.zip
+        cd ../..
+
+        curl -L -o eventqueuefixfix.zip https://github.com/srcwr/eventqueuefixfix/releases/download/v1.0.1/eventqueuefixfix-v1.0.1-def5b0e-windows-x32.zip
+        tar -xf eventqueuefixfix.zip
+        del eventqueuefixfix.zip
+
+        cd addons\sourcemod
+        curl -L https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip -o dynamicchannels.zip
+        tar -xf dynamicchannels.zip --strip-components=1
+        del dynamicchannels.zip
+        cd ../..
+
+        curl -L -o srcwrfloppy.zip https://github.com/srcwr/srcwrfloppy/releases/download/v4.0.0/srcwrfloppy-v4.0.0.zip
+        tar -xf srcwrfloppy.zip
+        del srcwrfloppy.zip
+
+        curl -L -o tickrateenabler.zip https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+        tar -xf tickrateenabler.zip --strip-components=1
+        del tickrateenabler.zip
+
+        cd ../..
+    )
+)
