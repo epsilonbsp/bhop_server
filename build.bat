@@ -65,3 +65,20 @@ if "%~1" == "install" (
         cd ../..
     )
 )
+
+if "%~1" == "build" (
+    xcopy "core\*" "build\game\cstrike\" /E /H /C /Y
+    xcopy "plugins\bhoptimer\*" "build\game\cstrike\" /E /H /C /Y
+
+    cd build\game\cstrike\addons\sourcemod\scripting
+    .\compile.exe
+
+    cd ..
+    xcopy "scripting\compiled\*" "plugins\" /E /H /C /Y
+)
+
+if "%~1" == "start" (
+    cd build\game
+
+    .\srcds.exe -game cstrike -insecure +sv_cheats 1 +sv_airaccelerate 1000 +sv_enablebunnyhopping 1 -tickrate 100 +sv_maxcmdrate 100 +sv_maxupdaterate 100 +mp_autokick 0 +mp_freezetime 0 +bot_quota_mode normal +sv_hudhint_sound 0 +mp_ignore_round_win_conditions 1 +mp_autoteambalance 0 +mp_limitteams 0 +bot_join_after_player 0 +bot_dont_shoot 1 +bot_chatter off +mp_roundtime 0 +mp_autoteambalance 0 +sv_accelerate 5
+)
