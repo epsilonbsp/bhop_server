@@ -73,6 +73,7 @@ if "%~1" == "build" (
     xcopy "plugins\landfix\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\rngfix\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\showplayerclips\*" "build\game\cstrike\" /E /H /C /Y
+    xcopy "plugins\showtriggers\*" "build\game\cstrike\" /E /H /C /Y
 
     cd build\game\cstrike\addons\sourcemod\scripting
     .\compile.exe

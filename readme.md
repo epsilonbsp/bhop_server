@@ -35,3 +35,5 @@
 
     https://github.com/GAMMACASE/ShowPlayerClips/releases
     https://github.com/GAMMACASE/ShowPlayerClips/archive/refs/tags/1.1.3.zip
+
+    https://github.com/1ci/showtriggers
