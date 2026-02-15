@@ -48,6 +48,8 @@ if "%~1" == "install" (
         tar -xf tickrateenabler.zip --strip-components=1
         del tickrateenabler.zip
 
+        del /f /q maps\*.*
+
         cd ../..
     )
 )
