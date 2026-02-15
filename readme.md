@@ -26,3 +26,6 @@
     https://github.com/shavitush/bhoptimer/archive/refs/tags/v4.0.1.zip
 
     https://github.com/KawaiiClan/bhop-get-stats
+
+    https://github.com/Haze1337/Landfix/releases
+    https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
