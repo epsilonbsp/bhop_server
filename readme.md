@@ -21,3 +21,6 @@
 
     https://github.com/idk1703/TickrateEnabler/releases
     https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+
+    https://github.com/shavitush/bhoptimer/releases
+    https://github.com/shavitush/bhoptimer/archive/refs/tags/v4.0.1.zip
