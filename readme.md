@@ -29,3 +29,6 @@
 
     https://github.com/Haze1337/Landfix/releases
     https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
+
+    https://github.com/jason-e/rngfix/releases
+    https://github.com/jason-e/rngfix/archive/refs/tags/v1.1.3.zip
