@@ -471,7 +471,7 @@ void GetOSType(Handle gconf)
 {
 	gOSType = view_as<OSType>(GameConfGetOffset(gconf, "WinOrLin"));
 	
-	ASSERT_MSG(gOSType != OSUnknown, "Failed to get OS type. Make sure gamedata file is in gamedata folder, and you are using windows or linux.");
+	ASSERT_MSG(gOSType != OSUnknown, "Failed to get OS type. Make sure gamedata file is in gamedata folder and you are using windows or linux.");
 }
 
 void SetupDhooks(Handle gconf)
