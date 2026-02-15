@@ -69,6 +69,7 @@ if "%~1" == "install" (
 if "%~1" == "build" (
     xcopy "core\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\bhoptimer\*" "build\game\cstrike\" /E /H /C /Y
+    xcopy "plugins\jumpstats\*" "build\game\cstrike\" /E /H /C /Y
 
     cd build\game\cstrike\addons\sourcemod\scripting
     .\compile.exe

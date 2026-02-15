@@ -24,3 +24,5 @@
 
     https://github.com/shavitush/bhoptimer/releases
     https://github.com/shavitush/bhoptimer/archive/refs/tags/v4.0.1.zip
+
+    https://github.com/KawaiiClan/bhop-get-stats
