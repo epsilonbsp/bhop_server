@@ -32,3 +32,6 @@
 
     https://github.com/jason-e/rngfix/releases
     https://github.com/jason-e/rngfix/archive/refs/tags/v1.1.3.zip
+
+    https://github.com/GAMMACASE/ShowPlayerClips/releases
+    https://github.com/GAMMACASE/ShowPlayerClips/archive/refs/tags/1.1.3.zip
