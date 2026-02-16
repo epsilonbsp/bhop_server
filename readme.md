@@ -1,5 +1,9 @@
-# Bhop Server
-Simple bhop server setup
+# Bhop Server (WIP)
+My simple bhop server setup.
+
+This setup allows to just download or clone repo, run few commands and have local server working right away.
+
+Currently only works for Windows, later will try to update it to work for Linux.
 ## Setup
 * Download or clone repo
 * Open terminal
@@ -12,7 +16,30 @@ Simple bhop server setup
 * Finally run this command to start server
 
       .\build.bat start
+## Documentation
+### Install command
+Install command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
 
+Also it downloads base stuff that is required for this bhop server and merges it into `cstrike` game server root folder:
+* SourceMod
+* MetamodSource
+* DynamicChannels
+* TickrateEnabler
+### Build command
+Currently this build system is very simple. It just copies files and runs build command. This may not be ideal, but it works and is enough for now at least.
+
+Build command merges contents of `core` and `plugins` folders into `cstrike` game server root folder.
+
+Then it runs `compile.exe` in `cstrike/addons/sourcemod/scripting` directory which compiles all plugins into `compiled` directory.
+
+Finally it merges contents of `cstrike/addons/sourcemod/scripting/compiled` directory into `cstrike/addons/sourcemod/plugins` directory.
+
+### Start command
+Start command starts the actual bhop server
+### Helpful
+* Server config location: `plugins/bhoptimer/cfg/server.cfg`
+* Admin list location: `core/addons/sourcemod/configs/admins_simple.ini`
+* Use `sm_zones` command to add zones
 ## References
 ### Base
 * SteamCMD
