@@ -6,7 +6,7 @@ This setup allows to just download or clone repo, run few commands and have loca
 Currently only works for Windows, later will try to update it to work for Linux.
 ## Setup
 * Download or clone repo
-* Open terminal
+* Open terminal in `bhop_server` directory
 * First run this command to install server
 
       .\build.bat install
@@ -20,7 +20,7 @@ Currently only works for Windows, later will try to update it to work for Linux.
 ### Install command
 Install command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
 
-Also it downloads base stuff that is required for this bhop server and merges it into `cstrike` game server root folder:
+Also it downloads base stuff that is required for this bhop server and merges it into `cstrike` game server root directory:
 * SourceMod
 * MetamodSource
 * DynamicChannels
@@ -28,15 +28,15 @@ Also it downloads base stuff that is required for this bhop server and merges it
 ### Build command
 Currently this build system is very simple. It just copies files and runs build command. This may not be ideal, but it works and is enough for now at least.
 
-Build command merges contents of `core` and `plugins` folders into `cstrike` game server root folder.
+Build command merges contents of `core` and `plugins` directories into `cstrike` game server root directory.
 
 Then it runs `compile.exe` in `cstrike/addons/sourcemod/scripting` directory which compiles all plugins into `compiled` directory.
 
 Finally it merges contents of `cstrike/addons/sourcemod/scripting/compiled` directory into `cstrike/addons/sourcemod/plugins` directory.
 
-Core folder has `configs` and `scripting` directories which are copied from SourceMod.
+Core directory has `configs` and `scripting` directories which are copied from SourceMod.
 
-Plugins folder has all the plugins.
+Plugins directory has all the plugins.
 
 So if you want to make any changes to `core` or `plugins` then you will have to run `.\build.bat build` command so it merges and compiles stuff into actual server that is located in `build/game`. You can also just compile it once, take the server and use it for your purposes without this setup.
 
