@@ -71,8 +71,14 @@ if "%~1" == "build" (
     xcopy "scripting\compiled\*" "plugins\" /E /H /C /Y
 )
 
-if "%~1" == "start" (
+if "%~1" == "start_lan" (
     cd build\game
 
-    .\srcds.exe -game cstrike -insecure -log -tickrate 100
+    .\srcds.exe -game cstrike +map bhop_ambience +sv_lan 1 -maxplayers 24 -insecure -log -console
+)
+
+if "%~1" == "start_gui" (
+    cd build\game
+
+    .\srcds.exe -game cstrike -log
 )

@@ -13,9 +13,13 @@ Currently only works for Windows, later will try to update it to work for Linux.
 * Then run this command to build all plugins
 
       .\build.bat build
-* Finally run this command to start server
+* Finally run one of these commands to start server
 
-      .\build.bat start
+      # Start LAN server
+      .\build.bat start_lan
+
+      # Start server with GUI
+      .\build.bat start_gui
 ## Documentation
 ### Install command
 Install command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
