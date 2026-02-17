@@ -52,9 +52,7 @@ if "%~1" == "install" (
 
         cd ../..
     )
-)
-
-if "%~1" == "build" (
+) else if "%~1" == "build" (
     xcopy "core\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\bhoptimer\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\jumpstats\*" "build\game\cstrike\" /E /H /C /Y
@@ -69,16 +67,14 @@ if "%~1" == "build" (
 
     cd ..
     xcopy "scripting\compiled\*" "plugins\" /E /H /C /Y
-)
-
-if "%~1" == "start_lan" (
+) else if "%~1" == "start_lan" (
     cd build\game
 
     .\srcds.exe -game cstrike +map bhop_ambience +sv_lan 1 -maxplayers 24 -insecure -log -console
-)
-
-if "%~1" == "start_gui" (
+) else if "%~1" == "start_gui" (
     cd build\game
 
     .\srcds.exe -game cstrike -log
+) else (
+    echo No valid command was specified
 )

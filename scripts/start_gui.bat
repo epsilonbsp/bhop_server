@@ -1,2 +1,3 @@
 cd ..
-.\build.bat start_gui
+call .\build.bat start_gui
+pause

@@ -1,2 +1,3 @@
 cd ..
-.\build.bat start_lan
+call .\build.bat start_lan
+pause

@@ -1,2 +1,3 @@
 cd ..
-.\build.bat build
+call .\build.bat build
+pause

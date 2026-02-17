@@ -1,2 +1,3 @@
 cd ..
-.\build.bat install
+call .\build.bat install
+pause
