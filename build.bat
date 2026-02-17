@@ -65,7 +65,7 @@ if "%~1" == "build" (
     xcopy "plugins\showtriggers\*" "build\game\cstrike\" /E /H /C /Y
 
     cd build\game\cstrike\addons\sourcemod\scripting
-    .\compile.exe
+    echo. | .\compile.exe
 
     cd ..
     xcopy "scripting\compiled\*" "plugins\" /E /H /C /Y
