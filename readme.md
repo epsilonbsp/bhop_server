@@ -48,7 +48,7 @@ So if you want to make any changes to `core` or `plugins` then you will have to 
 ### Start command
 Start command starts the actual bhop server
 ### Helpful
-* Server config location: `plugins/bhoptimer/cfg/server.cfg`
+* Server config location: `core/cfg/server.cfg`
 * Admin list location: `core/addons/sourcemod/configs/admins_simple.ini`
 * Use `sm_zones` command to add zones
 ## References
