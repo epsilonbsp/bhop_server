@@ -34,6 +34,12 @@ Then it runs `compile.exe` in `cstrike/addons/sourcemod/scripting` directory whi
 
 Finally it merges contents of `cstrike/addons/sourcemod/scripting/compiled` directory into `cstrike/addons/sourcemod/plugins` directory.
 
+Core folder has `configs` and `scripting` directories which are copied from SourceMod.
+
+Plugins folder has all the plugins.
+
+So if you want to make any changes to `core` or `plugins` then you will have to run `.\build.bat build` command so it merges and compiles stuff into actual server that is located in `build/game`. You can also just compile it once, take the server and use it for your purposes without this setup.
+
 ### Start command
 Start command starts the actual bhop server
 ### Helpful
