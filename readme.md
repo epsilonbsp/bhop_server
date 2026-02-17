@@ -20,6 +20,7 @@ Currently only works for Windows, later will try to update it to work for Linux.
 
       # Start server with GUI
       .\build.bat start_gui
+* If you don't want to touch terminal, then there is `scripts` folder with separate script for each command. So you can just run them like executables in same order.
 ## Documentation
 ### Install command
 Install command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
