@@ -1,5 +1,11 @@
 @echo off
 
+set STEAMCMD_URL=https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+set MMSOURCE_URL=https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-windows.zip
+set SOURCEMOD_URL=https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip
+set DYNAMICCHANNELS_URL=https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip
+set TICKRATEENABLER_URL=https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+
 cls
 
 if "%~1" == "install" (
@@ -10,10 +16,12 @@ if "%~1" == "install" (
         mkdir steamcmd
         cd steamcmd
 
-        curl -O https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+        echo Downloading SteamCMD...
+        curl -O %STEAMCMD_URL%
         tar -xf steamcmd.zip
         del steamcmd.zip
 
+        echo Installing SteamCMD...
         .\steamcmd.exe +login anonymous +logout +quit
 
         cd ..
@@ -22,6 +30,7 @@ if "%~1" == "install" (
     if not exist game (
         cd steamcmd
 
+        echo Installing Counter Strike: Source Dedicated Server...
         .\steamcmd.exe +force_install_dir ../game +login anonymous +app_update 232330 validate +logout +quit
 
         cd ..
@@ -30,21 +39,25 @@ if "%~1" == "install" (
     if not exist game\cstrike\addons (
         cd game\cstrike
 
-        curl -L -o mmsource.zip https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-windows.zip
+        echo Downloading MetamodSource...
+        curl -L -o mmsource.zip %MMSOURCE_URL%
         tar -xf mmsource.zip
         del mmsource.zip
 
-        curl -L -o sourcemod.zip https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip
+        echo Downloading SourceMod...
+        curl -L -o sourcemod.zip %SOURCEMOD_URL%
         tar -xf sourcemod.zip
         del sourcemod.zip
 
+        echo Downloading DynamicChannels...
         cd addons\sourcemod
-        curl -L https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip -o dynamicchannels.zip
+        curl -L %DYNAMICCHANNELS_URL% -o dynamicchannels.zip
         tar -xf dynamicchannels.zip --strip-components=1
         del dynamicchannels.zip
         cd ../..
 
-        curl -L -o tickrateenabler.zip https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+        echo Downloading TickrateEnabler...
+        curl -L -o tickrateenabler.zip %TICKRATEENABLER_URL%
         tar -xf tickrateenabler.zip --strip-components=1
         del tickrateenabler.zip
 

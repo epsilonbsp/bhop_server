@@ -1,5 +1,11 @@
 #!/bin/bash
 
+STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"
+MMSOURCE_URL="https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-linux.tar.gz"
+SOURCEMOD_URL="https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-linux.tar.gz"
+DYNAMICCHANNELS_URL="https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip"
+TICKRATEENABLER_URL="https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-linux-tick100-6e83b42.zip"
+
 clear
 
 if [ "$1" = "install" ]; then
@@ -10,10 +16,12 @@ if [ "$1" = "install" ]; then
         mkdir steamcmd
         cd steamcmd
 
-        curl -O https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+        echo Downloading SteamCMD...
+        curl -O $STEAMCMD_URL
         tar -xf steamcmd_linux.tar.gz
         rm steamcmd_linux.tar.gz
 
+        echo Installing SteamCMD...
         ./steamcmd.sh +login anonymous +logout +quit
 
         cd ..
@@ -22,6 +30,7 @@ if [ "$1" = "install" ]; then
     if [ ! -d game ]; then
         cd steamcmd
 
+        echo Installing Counter Strike: Source Dedicated Server...
         ./steamcmd.sh +force_install_dir ../game +login anonymous +app_update 232330 validate +logout +quit
 
         cd ..
@@ -30,21 +39,26 @@ if [ "$1" = "install" ]; then
     if [ ! -d game/cstrike/addons ]; then
         cd game/cstrike
 
-        curl -L -o mmsource.tar.gz https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-linux.tar.gz
+        echo Downloading MetamodSource...
+        curl -L -o mmsource.tar.gz $MMSOURCE_URL
         tar -xf mmsource.tar.gz
         rm mmsource.tar.gz
 
-        curl -L -o sourcemod.tar.gz https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-linux.tar.gz
+        echo Downloading SourceMod...
+        curl -L -o sourcemod.tar.gz $SOURCEMOD_URL
         tar -xf sourcemod.tar.gz
         rm sourcemod.tar.gz
 
+        echo Downloading DynamicChannels...
         cd addons/sourcemod
-        curl -L https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip -o dynamicchannels.zip
-        tar -xf dynamicchannels.zip --strip-components=1
-        rm dynamicchannels.zip
+        curl -L $DYNAMICCHANNELS_URL -o dynamicchannels.zip
+        unzip -o dynamicchannels.zip -d _tmp_dynamicchannels
+        cp -r _tmp_dynamicchannels/*/* ./
+        rm -rf _tmp_dynamicchannels dynamicchannels.zip
         cd ../..
 
-        curl -L -o tickrateenabler.zip https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-linux-tick100-6e83b42.zip
+        echo Downloading TickrateEnabler...
+        curl -L -o tickrateenabler.zip $TICKRATEENABLER_URL
         unzip -o tickrateenabler.zip -d _tmp_tickrate
         cp -r _tmp_tickrate/*/* ./
         rm -rf _tmp_tickrate tickrateenabler.zip
