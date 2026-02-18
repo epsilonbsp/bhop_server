@@ -2,25 +2,43 @@
 My simple bhop server setup.
 
 This setup allows to just download or clone repo, run few commands and have local server working right away.
+## Requirements
+### Windows
+* Make sure you have `curl` and `tar`
+### Linux
+* Install dependencies for SteamCMD
 
-Currently only works for Windows, later will try to update it to work for Linux.
+      sudo apt install -y lib32gcc-s1 lib32stdc++6 curl tar
+* It is recommended to run SteamCMD with non-root user, `build.sh` script doesn't automatically account for that
 ## Setup
+### Windows
 * Download or clone repo
-* Open terminal in `bhop_server` directory
-* First run this command to install server
+* Open terminal in `bhop_server` directory and run these commands
 
+      # Install server
       .\build.bat install
-* Then run this command to build all plugins
 
+      # Build all plugins and merge into server
       .\build.bat build
-* Finally run one of these commands to start server
 
       # Start LAN server
       .\build.bat start_lan
 
-      # Start server with GUI
+      # Or start server with GUI
       .\build.bat start_gui
 * If you don't want to touch terminal, then there is `scripts` folder with separate script for each command. So you can just run them like executables in same order.
+### Linux
+* Download or clone repo
+* Open terminal in `bhop_server` directory and run these commands
+
+      # Install server
+      .\build.sh install
+
+      # Build all plugins and merge into server
+      .\build.sh build
+
+      # Start LAN server
+      .\build.sh start_lan
 ## Documentation
 ### Install command
 Install command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
