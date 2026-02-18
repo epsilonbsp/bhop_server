@@ -41,7 +41,7 @@ This setup allows to just download or clone repo, run few commands and have loca
       .\build.sh start_lan
 ## Documentation
 ### Install command
-Install command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
+**Install** command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
 
 Also it downloads base stuff that is required for this bhop server and merges it into `cstrike` game server root directory:
 * SourceMod
@@ -51,7 +51,7 @@ Also it downloads base stuff that is required for this bhop server and merges it
 ### Build command
 Currently this build system is very simple. It just copies files and runs build command. This may not be ideal, but it works and is enough for now at least.
 
-Build command merges contents of `core` and `plugins` directories into `cstrike` game server root directory.
+**Build** command merges contents of `core` and `plugins` directories into `cstrike` game server root directory.
 
 Then it runs `compile.exe` in `cstrike/addons/sourcemod/scripting` directory which compiles all plugins into `compiled` directory.
 
@@ -63,8 +63,10 @@ Plugins directory has all the plugins.
 
 So if you want to make any changes to `core` or `plugins` then you will have to run `.\build.bat build` command so it merges and compiles stuff into actual server that is located in `build/game`. You can also just compile it once, take the server and use it for your purposes without this setup.
 
-### Start command
-Start command starts the actual bhop server
+### Start commands
+**Start LAN** command starts the actual server on LAN, so it should not be publicly visible
+
+**Star GUI** command launches server GUI from which you can actually start server. Seems to work only on Windows.
 ### Helpful
 * Server config location: `core/cfg/server.cfg`
 * Admin list location: `core/addons/sourcemod/configs/admins_simple.ini`
