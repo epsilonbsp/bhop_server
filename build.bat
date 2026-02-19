@@ -10,11 +10,11 @@ cls
 
 if "%~1" == "install" (
     if not exist build mkdir build
-    cd build
+    pushd build
 
     if not exist steamcmd (
         mkdir steamcmd
-        cd steamcmd
+        pushd steamcmd
 
         echo Downloading SteamCMD...
         curl -O %STEAMCMD_URL%
@@ -24,20 +24,20 @@ if "%~1" == "install" (
         echo Installing SteamCMD...
         .\steamcmd.exe +login anonymous +logout +quit
 
-        cd ..
+        popd
     )
 
     if not exist game (
-        cd steamcmd
+        pushd steamcmd
 
         echo Installing Counter Strike: Source Dedicated Server...
         .\steamcmd.exe +force_install_dir ../game +login anonymous +app_update 232330 validate +logout +quit
 
-        cd ..
+        popd
     )
 
     if not exist game\cstrike\addons (
-        cd game\cstrike
+        pushd game\cstrike
 
         echo Downloading MetamodSource...
         curl -L -o mmsource.zip %MMSOURCE_URL%
@@ -50,11 +50,11 @@ if "%~1" == "install" (
         del sourcemod.zip
 
         echo Downloading DynamicChannels...
-        cd addons\sourcemod
+        pushd addons\sourcemod
         curl -L %DYNAMICCHANNELS_URL% -o dynamicchannels.zip
         tar -xf dynamicchannels.zip --strip-components=1
         del dynamicchannels.zip
-        cd ../..
+        popd
 
         echo Downloading TickrateEnabler...
         curl -L -o tickrateenabler.zip %TICKRATEENABLER_URL%
@@ -63,8 +63,10 @@ if "%~1" == "install" (
 
         del /f /q maps\*.*
 
-        cd ../..
+        popd
     )
+
+    popd
 ) else if "%~1" == "build" (
     xcopy "core\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\bhoptimer\*" "build\game\cstrike\" /E /H /C /Y
@@ -75,19 +77,25 @@ if "%~1" == "install" (
     xcopy "plugins\showplayerclips\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\showtriggers\*" "build\game\cstrike\" /E /H /C /Y
 
-    cd build\game\cstrike\addons\sourcemod\scripting
-    echo. | .\compile.exe
+    pushd build\game\cstrike\addons\sourcemod\scripting
 
+    echo. | .\compile.exe
     cd ..
     xcopy "scripting\compiled\*" "plugins\" /E /H /C /Y
+
+    popd
 ) else if "%~1" == "start_lan" (
-    cd build\game
+    pushd build\game
 
     .\srcds.exe -game cstrike +map bhop_ambience +sv_lan 1 -maxplayers 24 -insecure -log -console
+
+    popd
 ) else if "%~1" == "start_gui" (
-    cd build\game
+    pushd build\game
 
     .\srcds.exe -game cstrike -log
+
+    popd
 ) else (
     echo No valid command was specified
 )
