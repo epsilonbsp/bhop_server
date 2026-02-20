@@ -10,11 +10,11 @@ clear
 
 if [ "$1" = "install" ]; then
     mkdir -p build
-    cd build
+    pushd build
 
     if [ ! -d steamcmd ]; then
         mkdir steamcmd
-        cd steamcmd
+        pushd steamcmd
 
         echo Downloading SteamCMD...
         curl -O $STEAMCMD_URL
@@ -24,20 +24,20 @@ if [ "$1" = "install" ]; then
         echo Installing SteamCMD...
         ./steamcmd.sh +login anonymous +logout +quit
 
-        cd ..
+        popd
     fi
 
     if [ ! -d game ]; then
-        cd steamcmd
+        pushd steamcmd
 
         echo Installing Counter Strike: Source Dedicated Server...
         ./steamcmd.sh +force_install_dir ../game +login anonymous +app_update 232330 validate +logout +quit
 
-        cd ..
+        popd ..
     fi
 
     if [ ! -d game/cstrike/addons ]; then
-        cd game/cstrike
+        pushd game/cstrike
 
         echo Downloading MetamodSource...
         curl -L -o mmsource.tar.gz $MMSOURCE_URL
@@ -50,12 +50,12 @@ if [ "$1" = "install" ]; then
         rm sourcemod.tar.gz
 
         echo Downloading DynamicChannels...
-        cd addons/sourcemod
+        pushd addons/sourcemod
         curl -L $DYNAMICCHANNELS_URL -o dynamicchannels.zip
         unzip -o dynamicchannels.zip -d _tmp_dynamicchannels
         cp -r _tmp_dynamicchannels/*/* ./
         rm -rf _tmp_dynamicchannels dynamicchannels.zip
-        cd ../..
+        popd
 
         echo Downloading TickrateEnabler...
         curl -L -o tickrateenabler.zip $TICKRATEENABLER_URL
@@ -65,8 +65,10 @@ if [ "$1" = "install" ]; then
 
         rm -f maps/*
 
-        cd ../..
+        popd
     fi
+
+    popd
 elif [ "$1" = "build" ]; then
     cp -r core/* build/game/cstrike/
     cp -r plugins/bhoptimer/* build/game/cstrike/
@@ -77,15 +79,19 @@ elif [ "$1" = "build" ]; then
     cp -r plugins/showplayerclips/* build/game/cstrike/
     cp -r plugins/showtriggers/* build/game/cstrike/
 
-    cd build/game/cstrike/addons/sourcemod/scripting
-    echo | ./compile.sh
+    pushd build/game/cstrike/addons/sourcemod/scripting
 
+    echo | ./compile.sh
     cd ..
     cp -r scripting/compiled/* plugins/
+
+    popd
 elif [ "$1" = "start_lan" ]; then
-    cd build/game
+    pushd build/game
 
     ./srcds_run -game cstrike +map bhop_ambience +sv_lan 1 -maxplayers 24 -insecure -log -console
+
+    popd
 else
     echo "No valid command was specified"
 fi
