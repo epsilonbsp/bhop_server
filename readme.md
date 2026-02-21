@@ -92,6 +92,15 @@ So if you want to make any changes to `core` or `plugins` then you will have to 
 
       https://github.com/idk1703/TickrateEnabler/releases
       https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+
+* REST in Pawn Extension
+      https://github.com/ErikMinekus/sm-ripext/releases
+      https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-windows.zip
+      https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-linux.zip
+
+* Bzip2 Extension
+      https://github.com/epsilonbsp/sm_bzip2/releases
+      https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
 ### Plugins
 * Bhop Timer
 

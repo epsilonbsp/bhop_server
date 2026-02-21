@@ -5,6 +5,8 @@ MMSOURCE_URL="https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-li
 SOURCEMOD_URL="https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-linux.tar.gz"
 DYNAMICCHANNELS_URL="https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip"
 TICKRATEENABLER_URL="https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-linux-tick100-6e83b42.zip"
+RIPEXT_URL="https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-linux.zip"
+BZIP2_URL="https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip"
 
 clear
 
@@ -62,6 +64,16 @@ if [ "$1" = "install" ]; then
         unzip -o tickrateenabler.zip -d _tmp_tickrate
         cp -r _tmp_tickrate/*/* ./
         rm -rf _tmp_tickrate tickrateenabler.zip
+
+        echo Downloading REST in Pawn Extension...
+        curl -L -o ripext.zip $RIPEXT_URL
+        unzip -o ripext.zip
+        rm ripext.zip
+
+        echo Downloading Bzip2 Extension...
+        curl -L -o bzip2.zip $BZIP2_URL
+        unzip -o bzip2.zip
+        rm bzip2.zip
 
         rm -f maps/*
 

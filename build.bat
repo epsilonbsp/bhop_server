@@ -5,6 +5,8 @@ set MMSOURCE_URL=https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219
 set SOURCEMOD_URL=https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip
 set DYNAMICCHANNELS_URL=https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip
 set TICKRATEENABLER_URL=https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+set RIPEXT_URL=https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-windows.zip
+set BZIP2_URL=https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
 
 cls
 
@@ -60,6 +62,16 @@ if "%~1" == "install" (
         curl -L -o tickrateenabler.zip %TICKRATEENABLER_URL%
         tar -xf tickrateenabler.zip --strip-components=1
         del tickrateenabler.zip
+
+        echo Downloading REST in Pawn Extension...
+        curl -L -o ripext.zip %RIPEXT_URL%
+        tar -xf ripext.zip
+        del ripext.zip
+
+        echo Downloading Bzip2 Extension...
+        curl -L -o bzip2.zip %BZIP2_URL%
+        tar -xf bzip2.zip
+        del bzip2.zip
 
         del /f /q maps\*.*
 
