@@ -90,6 +90,7 @@ elif [ "$1" = "build" ]; then
     cp -r plugins/rngfix/* build/game/cstrike/
     cp -r plugins/showplayerclips/* build/game/cstrike/
     cp -r plugins/showtriggers/* build/game/cstrike/
+    cp -r plugins/maploader/* build/game/cstrike/
 
     pushd build/game/cstrike/addons/sourcemod/scripting
 

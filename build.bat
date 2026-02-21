@@ -88,6 +88,7 @@ if "%~1" == "install" (
     xcopy "plugins\rngfix\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\showplayerclips\*" "build\game\cstrike\" /E /H /C /Y
     xcopy "plugins\showtriggers\*" "build\game\cstrike\" /E /H /C /Y
+    xcopy "plugins\maploader\*" "build\game\cstrike\" /E /H /C /Y
 
     pushd build\game\cstrike\addons\sourcemod\scripting
 
