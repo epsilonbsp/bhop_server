@@ -160,6 +160,15 @@ def merge_files(from_dir: str, to_dir: str) -> None:
         elif os.path.isdir(src_path):
             shutil.copytree(src_path, dst_path, dirs_exist_ok = True)
 
+def clear_directory(path: str) -> None:
+    for item in os.listdir(path):
+        item_path = os.path.join(path, item)
+
+        if os.path.isfile(item_path) or os.path.islink(item_path):
+            os.remove(item_path)
+        elif os.path.isdir(item_path):
+            shutil.rmtree(item_path)
+
 @dataclass
 class Download_Info:
     url: str
@@ -208,6 +217,60 @@ RESOURCES_PLUGINS_DIR_PATH = os.path.join(RESOURCES_DIR_PATH, "plugins")
 
 CORE_DIR_PATH = "core"
 PLUGINS_DIR_PATH = "plugins"
+
+ENABLED_PLUGINS = [
+    "basebans.smx",
+    "basechat.smx",
+    "basecomm.smx",
+    "basecommands.smx",
+    "basetriggers.smx",
+    "basevotes.smx",
+    "bhop-get-stats.smx",
+    "clientprefs.smx",
+    "DynamicChannels.smx",
+    "eventqueuefix.smx",
+    # "ExamplePlugin.smx",
+    "funcommands.smx",
+    "funvotes.smx",
+    "jumpstats.smx",
+    "landfix.smx",
+    "mapchooser.smx",
+    "maploader.smx",
+    "nextmap.smx",
+    "nominations.smx",
+    "playercommands.smx",
+    "pushfix.smx",
+    "randomcycle.smx",
+    "reservedslots.smx",
+    "rngfix.smx",
+    "rockthevote.smx",
+    "shavit-chat.smx",
+    "shavit-checkpoints.smx",
+    "shavit-core.smx",
+    "shavit-hud.smx",
+    "shavit-mapchooser.smx",
+    "shavit-misc.smx",
+    "shavit-rankings.smx",
+    "shavit-replay-playback.smx",
+    "shavit-replay-recorder.smx",
+    "shavit-sounds.smx",
+    "shavit-stats.smx",
+    "shavit-tas.smx",
+    "shavit-timelimit.smx",
+    "shavit-wr.smx",
+    "shavit-zones.smx",
+    "shavit-zones-json.smx",
+    "showplayerclips.smx",
+    "showtriggers.smx",
+    "sounds.smx",
+    # "sql-admin-manager.smx",
+    "admin-flatfile.smx",
+    "adminhelp.smx",
+    "adminmenu.smx",
+    # "admin-sql-prefetch.smx",
+    # "admin-sql-threaded.smx",
+    "antiflood.smx"
+]
 
 def get_steamcmd_download_info() -> Download_Info:
     if CURR_OS == OS_Type.WINDOWS:
@@ -445,7 +508,15 @@ def build() -> None:
 
     pop_dir()
 
-    merge_files(os.path.join(SOURCEMOD_SCRIPTING_DIR_PATH, "compiled"), SOURCEMOD_PLUGINS_DIR_PATH)
+    clear_directory(SOURCEMOD_PLUGINS_DIR_PATH)
+
+    compiled_dir = os.path.join(SOURCEMOD_SCRIPTING_DIR_PATH, "compiled")
+
+    for plugin in ENABLED_PLUGINS:
+        shutil.copy(
+            os.path.join(compiled_dir, plugin),
+            os.path.join(SOURCEMOD_PLUGINS_DIR_PATH, plugin)
+        )
 
     return
 
