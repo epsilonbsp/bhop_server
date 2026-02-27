@@ -1,130 +1,142 @@
-# Bhop Server (WIP)
+# Bhop Server
 My simple bhop server setup.
 
 This setup allows to just download or clone repo, run few commands and have local server working right away.
+
 ## Requirements
 ### Windows
-* Make sure you have `curl` and `tar`
-### Linux
-* Install dependencies for SteamCMD
+* Download and install [Python](https://www.python.org/downloads/)
 
-      sudo apt install -y lib32gcc-s1 lib32stdc++6 curl tar
-* It is recommended to run SteamCMD with non-root user, `build.sh` script doesn't automatically account for that
-## Setup
-### Windows
+### Linux
+* Install dependencies
+
+      sudo apt install python3 python-is-python3
+
+## Usage
 * Download or clone repo
 * Open terminal in `bhop_server` directory and run these commands
 
-      # Install server
-      .\build.bat install
+      # Install SteamCMD, server, extensions, plugins
+      python build.py install_all
 
-      # Build all plugins and merge into server
-      .\build.bat build
+      # Build plugins (if you make changes to plugins)
+      python build.py build
 
-      # Start LAN server
-      .\build.bat start_lan
+      # Start server
+      python build.py start_lan
 
-      # Or start server with GUI
-      .\build.bat start_gui
-* If you don't want to touch terminal, then there is `scripts` folder with separate script for each command. So you can just run them like executables in same order.
-### Linux
-* Download or clone repo
-* Open terminal in `bhop_server` directory and run these commands
+## Script Documentation
+Main ideas of `build.py` script
+* Programmatically assemble a bhop server with collection of extensions and plugins
+* Make it relatively easy to start simple LAN server for yourself
 
-      # Install server
-      .\build.sh install
+### Commands
+#### `python build.py install_steamcmd`
+* Downloads and installs SteamCMD
 
-      # Build all plugins and merge into server
-      .\build.sh build
+#### `python build.py install_server`
+* Installs `Counter Strike: Source Dedicated Server` app using SteamCMD
 
-      # Start LAN server
-      .\build.sh start_lan
-## Documentation
-### Install command
-**Install** command downloads and installs **SteamCMD** with **Counter Strike Source Dedicated Server**.
+#### `python build.py download_resources`
+* Downloads core, extension and plugins specified in `RESOURCES` constant
+* Unpacks all of that into `build/resources`
 
-Also it downloads base stuff that is required for this bhop server and merges it into `cstrike` game server root directory:
-* SourceMod
-* MetamodSource
-* DynamicChannels
-* TickrateEnabler
-### Build command
-Currently this build system is very simple. It just copies files and runs build command. This may not be ideal, but it works and is enough for now at least.
+#### `python build.py merge_resources`
+* Merges contents of directories in `build/resources` into `build/server/cstrike` directory
 
-**Build** command merges contents of `core` and `plugins` directories into `cstrike` game server root directory.
+#### `python build.py download_and_merge_resources`
+* Both downloads and merges resources
 
-Then it runs `compile.exe` in `cstrike/addons/sourcemod/scripting` directory which compiles all plugins into `compiled` directory.
+#### `python build.py build`
+* Merges contents of `core` and `plugins` directories into `build/server/cstrike`
+* Runs compilation executable in `build/server/cstrike/addons/sourcemod/scripting` directory
+* All plugins get compiled into `build/server/cstrike/addons/sourcemod/scripting/compiled` directory
+* After compilation clears `build/server/cstrike/addons/sourcemod/plugins` directory
+* Finally transfers all plugins specified in `ENABLED_PLUGINS` constant from `compiled` directory to `plugins` directory
 
-Finally it merges contents of `cstrike/addons/sourcemod/scripting/compiled` directory into `cstrike/addons/sourcemod/plugins` directory.
+#### `python build.py install_all`
+* Single command to do everything specified above
 
-Core directory has `configs` and `scripting` directories which are copied from SourceMod.
+#### `python build.py start_lan`
+* Starts LAN server in console mode
 
-Plugins directory has all the plugins.
-
-So if you want to make any changes to `core` or `plugins` then you will have to run `.\build.bat build` command so it merges and compiles stuff into actual server that is located in `build/game`. You can also just compile it once, take the server and use it for your purposes without this setup.
-
-### Start commands
-**Start LAN** command starts the actual server on LAN, so it should not be publicly visible
-
-**Star GUI** command launches server GUI from which you can actually start server. Seems to work only on Windows.
-### Helpful
-* Server config location: `core/cfg/server.cfg`
-* Admin list location: `core/addons/sourcemod/configs/admins_simple.ini`
-* Use `sm_zones` command to add zones
 ## References
-### Base
-* SteamCMD
+### SteamCMD
+    Website: https://developer.valvesoftware.com/wiki/SteamCMD
+    Windows: https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+    Linux:   https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 
-      https://developer.valvesoftware.com/wiki/SteamCMD
-      https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
-* MetamodSource
-
-      https://www.metamodsource.net/downloads.php?branch=stable
-      https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-windows.zip
+### Core
 * SourceMod
 
-      https://www.sourcemod.net/downloads.php?branch=stable
-      https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip
-* DynamicChannels
+      Source:  https://github.com/alliedmodders/sourcemod
+      Website: https://www.sourcemod.net/downloads.php?branch=stable
+      Windows: https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip
+      Linux:   https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-linux.tar.gz
 
-      https://github.com/Vauff/DynamicChannels
+* Metamod:Source
+
+      Source:  https://github.com/alliedmodders/metamod-source
+      Website: https://www.metamodsource.net/downloads.php?branch=stable
+      Windows: https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-windows.zip
+      Linux:   https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-linux.tar.gz
+
 * TickrateEnabler
 
-      https://github.com/idk1703/TickrateEnabler/releases
-      https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+      Source:  https://github.com/idk1703/TickrateEnabler
+      Windows: https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip
+      Linux:   https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-linux-tick100-6e83b42.zip
+
+### Extensions
+* Bzip2 Extension
+
+      Source: https://github.com/epsilonbsp/sm_bzip2
+      Both:   https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
 
 * REST in Pawn Extension
-      https://github.com/ErikMinekus/sm-ripext/releases
-      https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-windows.zip
-      https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-linux.zip
 
-* Bzip2 Extension
-      https://github.com/epsilonbsp/sm_bzip2/releases
-      https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
+      Source:  https://github.com/ErikMinekus/sm-ripext
+      Windows: https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-windows.zip
+      Linux:   https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-linux.zip
+
 ### Plugins
+* DynamicChannels
+
+      Source: https://github.com/Vauff/DynamicChannels
+
 * Bhop Timer
 
-      https://github.com/shavitush/bhoptimer/releases
-      https://github.com/shavitush/bhoptimer/archive/refs/tags/v4.0.1.zip
+      Source:  https://github.com/shavitush/bhoptimer
+      Release: https://github.com/shavitush/bhoptimer/archive/refs/tags/v4.0.1.zip
+
 * Jump Stats
 
-      https://github.com/KawaiiClan/bhop-get-stats
+      Source: https://github.com/KawaiiClan/bhop-get-stats
+
 * Land Fix
 
-      https://github.com/Haze1337/Landfix/releases
-      https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
+      Source:  https://github.com/Haze1337/Landfix
+      Release: https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
+
+* Map Downloader
+
+      Source: https://github.com/epsilonbsp/sm_maploader
+
 * Push Fix
 
-      https://forums.alliedmods.net/showthread.php?p=2323671
-      https://forums.alliedmods.net/attachment.php?attachmentid=146798&d=1437770252
+      Source:  https://forums.alliedmods.net/showthread.php?p=2323671
+      Release: https://forums.alliedmods.net/attachment.php?attachmentid=146798&d=1437770252
+
 * RNG Fix
 
-      https://github.com/jason-e/rngfix/releases
-      https://github.com/jason-e/rngfix/archive/refs/tags/v1.1.3.zip
+      Source:  https://github.com/jason-e/rngfix
+      Release: https://github.com/jason-e/rngfix/archive/refs/tags/v1.1.3.zip
+
 * Show Player Clips
 
-      https://github.com/GAMMACASE/ShowPlayerClips/releases
-      https://github.com/GAMMACASE/ShowPlayerClips/archive/refs/tags/1.1.3.zip
+      Source:  https://github.com/GAMMACASE/ShowPlayerClips
+      Release: https://github.com/GAMMACASE/ShowPlayerClips/archive/refs/tags/1.1.3.zip
+
 * Show Triggers
 
-      https://github.com/ecsr/showtriggers
+      Source: https://github.com/ecsr/showtriggers
