@@ -127,10 +127,10 @@ Main ideas of `build.py` script
 
       Source: https://github.com/epsilonbsp/sm_maploader
 
-* Push Fix
+* PushFix Definitive Edition
 
-      Source:  https://forums.alliedmods.net/showthread.php?p=2323671
-      Release: https://forums.alliedmods.net/attachment.php?attachmentid=146798&d=1437770252
+      Source:  https://github.com/rumourA/PushFixDE
+      Release: https://github.com/rumourA/PushFixDE/archive/refs/tags/1.0.zip
 
 * RNG Fix
 

@@ -274,6 +274,12 @@ CORE_DIR_PATH = "core"
 PLUGINS_DIR_PATH = "plugins"
 
 ENABLED_PLUGINS = [
+    "admin-flatfile.smx",
+    "adminhelp.smx",
+    "adminmenu.smx",
+    # "admin-sql-prefetch.smx",
+    # "admin-sql-threaded.smx",
+    "antiflood.smx",
     "basebans.smx",
     "basechat.smx",
     "basecomm.smx",
@@ -283,8 +289,8 @@ ENABLED_PLUGINS = [
     "bhop-get-stats.smx",
     "clientprefs.smx",
     "DynamicChannels.smx",
-    "eventqueuefix.smx",
-    # "ExamplePlugin.smx",
+    # "eventqueuefix.smx",
+    "ExamplePlugin.smx",
     "funcommands.smx",
     "funvotes.smx",
     "jumpstats.smx",
@@ -294,7 +300,6 @@ ENABLED_PLUGINS = [
     "nextmap.smx",
     "nominations.smx",
     "playercommands.smx",
-    "pushfix.smx",
     "randomcycle.smx",
     "reservedslots.smx",
     "rngfix.smx",
@@ -319,12 +324,7 @@ ENABLED_PLUGINS = [
     "showtriggers.smx",
     "sounds.smx",
     # "sql-admin-manager.smx",
-    "admin-flatfile.smx",
-    "adminhelp.smx",
-    "adminmenu.smx",
-    # "admin-sql-prefetch.smx",
-    # "admin-sql-threaded.smx",
-    "antiflood.smx"
+    "pushfix_de.smx"
 ]
 
 # Resources
