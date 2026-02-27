@@ -93,6 +93,11 @@ Main ideas of `build.py` script
       Source: https://github.com/epsilonbsp/sm_bzip2
       Both:   https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
 
+* Event Queue Fix Fix
+
+      Source:  https://github.com/srcwr/eventqueuefixfix
+      Windows: https://github.com/srcwr/eventqueuefixfix/releases/download/v1.0.1/eventqueuefixfix-v1.0.1-def5b0e-windows-x32.zip
+
 * REST in Pawn Extension
 
       Source:  https://github.com/ErikMinekus/sm-ripext

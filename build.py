@@ -395,6 +395,18 @@ RESOURCES.append(Resource(
 
 RESOURCES.append(Resource(
     Resource_Type.EXTENSION,
+    "eventqueuefixfix",
+    "Event Queue Fix Fix",
+    resolve_download_info({
+        OS_Type.WINDOWS: Download_Info(
+            "https://github.com/srcwr/eventqueuefixfix/releases/download/v1.0.1/eventqueuefixfix-v1.0.1-def5b0e-windows-x32.zip",
+            os.path.join(DOWNLOADS_DIR_PATH, "eventqueuefixfix.zip")
+        )
+    })
+))
+
+RESOURCES.append(Resource(
+    Resource_Type.EXTENSION,
     "ripext",
     "REST in Pawn Extension",
     resolve_download_info({
@@ -482,6 +494,9 @@ def install_server(reinstall = False):
 
 def download_resources() -> None:
     for resource in RESOURCES:
+        if not resource.download_info:
+            return
+
         if not os.path.exists(resource.download_info.path):
             download_file_and_log(resource.name, resource.download_info.url, resource.download_info.path)
 
