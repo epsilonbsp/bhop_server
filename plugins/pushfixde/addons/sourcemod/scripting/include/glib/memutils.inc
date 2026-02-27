@@ -154,31 +154,32 @@ stock int LoadStringFromAddress(Address addr, char[] buff, int length)
 	return i;
 }
 
-stock void DumpOnAddress(Address addr, int len, int columns = 10)
-{
-	char buff[128], buff2[128];
+// TODO: fix properly maybe
+// stock void DumpOnAddress(Address addr, int len, int columns = 10)
+// {
+// 	char buff[128], buff2[128];
 	
-	ASSERT(addr != Address_Null);
-	ASSERT(len > 0 && len < MEM_LEN_SAFE_THRESHOLD);
+// 	ASSERT(addr != Address_Null);
+// 	ASSERT(len > 0 && len < MEM_LEN_SAFE_THRESHOLD);
 	
-	Format(buff, sizeof(buff), "[0x%08X]", addr);
-	char chr;
-	for(int i = 0; i < len; i++)
-	{
-		chr = LoadFromAddress(addr + i, NumberType_Int8);
-		Format(buff, sizeof(buff), "%s %02X", buff, chr);
-		Format(buff2, sizeof(buff2), "%s%c", buff2, (chr > ' ' && chr != 0x7F && chr != 0xFF ? chr : '.'));
-		if(i % columns == columns - 1)
-		{
-			PrintToServer(__SNAME..."%s %s", buff, buff2);
-			Format(buff, sizeof(buff), "[0x%08X]", addr + i);
-			buff2[0] = '\0';
-		}
-	}
+// 	Format(buff, sizeof(buff), "[0x%08X]", addr);
+// 	char chr;
+// 	for(int i = 0; i < len; i++)
+// 	{
+// 		chr = LoadFromAddress(addr + i, NumberType_Int8);
+// 		Format(buff, sizeof(buff), "%s %02X", buff, chr);
+// 		Format(buff2, sizeof(buff2), "%s%c", buff2, (chr > ' ' && chr != 0x7F && chr != 0xFF ? chr : '.'));
+// 		if(i % columns == columns - 1)
+// 		{
+// 			PrintToServer(__SNAME..."%s %s", buff, buff2);
+// 			Format(buff, sizeof(buff), "[0x%08X]", addr + i);
+// 			buff2[0] = '\0';
+// 		}
+// 	}
 	
-	if((len - 1) % columns != columns - 1)
-		PrintToServer(__SNAME..."%s %s", buff, buff2);
-}
+// 	if((len - 1) % columns != columns - 1)
+// 		PrintToServer(__SNAME..."%s %s", buff, buff2);
+// }
 
 //NO OVERLAPPING!!
 stock void MoveBytes(Address from, Address to, int len, char replace_with = 0x90)
