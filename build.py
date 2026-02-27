@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 EpsilonBSP
+
 from dataclasses import dataclass
 from enum import auto, IntEnum
 import os
