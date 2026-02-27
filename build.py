@@ -1,146 +1,35 @@
 from dataclasses import dataclass
 from enum import auto, IntEnum
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import sys
 import tarfile
+import time
 from typing import Callable, List
 import urllib.request
 import zipfile
 
-# OS detection
+# OS type
 class OS_Type(IntEnum):
     WINDOWS = auto()
     LINUX = auto()
 
-CURR_OS: OS_Type
+def detect_os() -> OS_Type:
+    if sys.platform == "win32":
+        return OS_Type.WINDOWS
+    elif sys.platform == "linux":
+        return OS_Type.LINUX
+    else:
+        return 0
 
-if sys.platform == "win32":
-    CURR_OS = OS_Type.WINDOWS
-elif sys.platform == "linux":
-    CURR_OS = OS_Type.LINUX
-else:
+CURR_OS = detect_os()
+
+if not CURR_OS:
     print("Current OS is not supported.")
     sys.exit(1)
 
-# Download functions
-DOWNLOAD_CHUNK_SIZE = 8192
-DOWNLOAD_PROGRESS_STEP = 5
-
-class Download_Status(IntEnum):
-    SUCCESS = auto()
-    FAILURE = auto()
-
-Download_Callback = Callable[[int, int], None]|None
-
-def download_file(url: str, path: str, callback: Download_Callback = None) -> tuple[Download_Status, Exception|None]:
-    try:
-        request = urllib.request.Request(
-            url,
-            headers = {
-                "User-Agent": "curl/8.18.0"
-            }
-        )
-
-        with urllib.request.urlopen(request) as response:
-            downloaded_size = 0
-            total_size_str = response.headers.get("Content-Length")
-            total_size = int(total_size_str) if total_size_str else 0
-
-            with open(path, "wb") as file:
-                while True:
-                    chunk = response.read(DOWNLOAD_CHUNK_SIZE)
-
-                    if not chunk:
-                        break
-
-                    file.write(chunk)
-                    downloaded_size += len(chunk)
-
-                    if callback:
-                        callback(downloaded_size, total_size)
-
-        return Download_Status.SUCCESS, None
-    except Exception as e:
-        return Download_Status.FAILURE, e
-
-def download_file_and_log(name: str, url: str, path: str) -> None:
-    print(f"Downloading {name}...")
-    print(f"From: {url}")
-    print(f"To: {os.path.abspath(path)}")
-
-    last_step = -1
-
-    def callback(downloaded_size: int, total_size: int) -> None:
-        if total_size == 0:
-            return
-
-        nonlocal last_step
-
-        percent = int(downloaded_size / total_size * 100)
-        current_step = (percent // DOWNLOAD_PROGRESS_STEP) * DOWNLOAD_PROGRESS_STEP
-
-        if current_step > last_step:
-            last_step = current_step
-
-            print(f"\rDownload progress: {current_step}%", end = "")
-
-    status, e = download_file(url, path, callback)
-
-    if status == Download_Status.SUCCESS:
-        print("\r\033[KDownload success!")
-    else:
-        print(f"\r\033[KDownload failure: {e}")
-        sys.exit(1)
-
-# Unpack functions
-class Unpack_Status(IntEnum):
-    SUCCESS = auto()
-    FAILURE = auto()
-
-def unpack_file(archive_path: str, unpack_path: str, strip_top_level: bool = False) -> tuple[Unpack_Status, Exception|None]:
-    archive_path_obj = Path(archive_path)
-    unpack_path_obj = Path(unpack_path)
-
-    try:
-        if zipfile.is_zipfile(archive_path_obj):
-            with zipfile.ZipFile(archive_path_obj, "r") as archive:
-                archive.extractall(unpack_path_obj)
-        elif tarfile.is_tarfile(archive_path_obj):
-            with tarfile.open(archive_path_obj, "r:*") as archive:
-                archive.extractall(unpack_path_obj)
-        else:
-            raise Exception("Unsupported archive type")
-
-        if strip_top_level:
-            items = list(unpack_path_obj.iterdir())
-
-            if len(items) == 1 and items[0].is_dir():
-                top_folder = items[0]
-
-                for item in top_folder.iterdir():
-                    shutil.move(str(item), unpack_path_obj)
-
-                top_folder.rmdir()
-
-        return Unpack_Status.SUCCESS, None
-    except Exception as e:
-        return Unpack_Status.FAILURE, e
-
-def unpack_file_and_log(name: str, archive_path: str, unpack_path: str, strip_top_level: bool = False) -> None:
-    print(f"Unpacking {name}...")
-
-    status, e = unpack_file(archive_path, unpack_path, strip_top_level)
-
-    if status == Unpack_Status.SUCCESS:
-        print("Unpacking success!")
-    else:
-        print(f"Unpacking failure: {e}")
-        sys.exit(1)
-
-# Utility
+# File system
 dir_stack = []
 
 def push_dir(path: str) -> None:
@@ -169,6 +58,128 @@ def clear_directory(path: str) -> None:
         elif os.path.isdir(item_path):
             shutil.rmtree(item_path)
 
+# Download functions
+DOWNLOAD_CHUNK_SIZE = 8192
+DOWNLOAD_PROGRESS_STEP = 5
+
+class Download_Status(IntEnum):
+    SUCCESS = auto()
+    FAILURE = auto()
+
+Download_Callback = Callable[[int, int], None]|None
+
+def download_file(url: str, path: str, callback: Download_Callback = None) -> tuple[Download_Status, Exception|None]:
+    try:
+        request = urllib.request.Request(
+            url,
+            headers = {
+                "User-Agent": "curl/8.18.0"
+            }
+        )
+
+        with urllib.request.urlopen(request) as response:
+            content_length = response.headers.get("Content-Length")
+
+            downloaded_size = 0
+            total_size = int(content_length) if content_length else 0
+
+            with open(path, "wb") as file:
+                while True:
+                    chunk = response.read(DOWNLOAD_CHUNK_SIZE)
+
+                    if not chunk:
+                        break
+
+                    file.write(chunk)
+                    downloaded_size += len(chunk)
+
+                    if callback:
+                        callback(downloaded_size, total_size)
+
+        return Download_Status.SUCCESS, None
+    except Exception as e:
+        return Download_Status.FAILURE, e
+
+def download_file_and_log(name: str, url: str, path: str) -> None:
+    print(f"Downloading {name}...")
+    print(f"From: {url}")
+    print(f"To: {os.path.abspath(path)}")
+
+    last_step = -1
+
+    def callback(downloaded_size: int, total_size: int) -> None:
+        if total_size <= 0:
+            return
+
+        nonlocal last_step
+
+        percent = int(downloaded_size / total_size * 100)
+        current_step = (percent // DOWNLOAD_PROGRESS_STEP) * DOWNLOAD_PROGRESS_STEP
+
+        if current_step > last_step:
+            last_step = current_step
+
+            print(f"\rDownload progress: {current_step}%", end = "")
+
+    status, e = download_file(url, path, callback)
+
+    if status == Download_Status.SUCCESS:
+        print("\r\033[KDownload success!")
+    else:
+        print(f"\r\033[KDownload failure: {e}")
+        sys.exit(1)
+
+# Unpack functions
+class Unpack_Status(IntEnum):
+    SUCCESS = auto()
+    FAILURE = auto()
+
+def unpack_file(archive_path: str, unpack_path: str, strip_top_level: bool = False) -> tuple[Unpack_Status, Exception | None]:
+    try:
+        if zipfile.is_zipfile(archive_path):
+            with zipfile.ZipFile(archive_path, "r") as archive:
+                archive.extractall(unpack_path)
+        elif tarfile.is_tarfile(archive_path):
+            with tarfile.open(archive_path, "r:*") as archive:
+                archive.extractall(unpack_path)
+        else:
+            raise Exception("Unsupported archive type")
+
+        if strip_top_level:
+            items = [
+                os.path.join(unpack_path, item)
+                for item in os.listdir(unpack_path)
+            ]
+
+            if len(items) == 1 and os.path.isdir(items[0]):
+                top_folder = items[0]
+
+                for item in os.listdir(top_folder):
+                    shutil.move(
+                        os.path.join(top_folder, item),
+                        unpack_path
+                    )
+
+                os.rmdir(top_folder)
+
+        return Unpack_Status.SUCCESS, None
+    except Exception as e:
+        return Unpack_Status.FAILURE, e
+
+def unpack_file_and_log(name: str, archive_path: str, unpack_path: str, strip_top_level: bool = False) -> None:
+    print(f"Unpacking {name}...")
+    print(f"From: {os.path.abspath(archive_path)}")
+    print(f"To: {os.path.abspath(unpack_path)}")
+
+    status, e = unpack_file(archive_path, unpack_path, strip_top_level)
+
+    if status == Unpack_Status.SUCCESS:
+        print("Unpacking success!")
+    else:
+        print(f"Unpacking failure: {e}")
+        sys.exit(1)
+
+# Download and unpack info
 @dataclass
 class Download_Info:
     url: str
@@ -176,7 +187,7 @@ class Download_Info:
 
 @dataclass
 class Unpack_Info:
-    relative_dir: str = ""
+    wrapper_path: str = ""
     strip_top_level: bool = False
 
 def resolve_download_info(list: dict[OS_Type, Download_Info]) -> None:
@@ -185,6 +196,7 @@ def resolve_download_info(list: dict[OS_Type, Download_Info]) -> None:
 
     return list[CURR_OS]
 
+# Resource
 class Resource_Type(IntEnum):
     CORE = auto()
     EXTENSION = auto()
@@ -195,19 +207,59 @@ class Resource:
     type: Resource_Type
     key: str
     name: str
-    download_info: Download_Info
+    download_info: Download_Info|None = None
     unpack_info: Unpack_Info|None = None
+
+def get_resource_path(resource: Resource) -> str:
+    path = ""
+
+    if resource.type == Resource_Type.CORE:
+        path = RESOURCES_CORE_DIR_PATH
+    elif resource.type == Resource_Type.EXTENSION:
+        path = RESOURCES_EXTENSIONS_DIR_PATH
+    else:
+        path = RESOURCES_PLUGINS_DIR_PATH
+
+    return os.path.join(path, resource.key)
 
 # Config
 BUILD_DIR_PATH = "build"
-
 DOWNLOADS_DIR_PATH = os.path.join(BUILD_DIR_PATH, "downloads")
+
 STEAMCMD_DIR_PATH = os.path.join(BUILD_DIR_PATH, "steamcmd")
+
+def get_steamcmd_download_info() -> Download_Info:
+    if CURR_OS == OS_Type.WINDOWS:
+        return Download_Info(
+            "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip",
+            os.path.join(DOWNLOADS_DIR_PATH, "steamcmd.zip")
+        )
+    else:
+        return Download_Info(
+            "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz",
+            os.path.join(DOWNLOADS_DIR_PATH, "steamcmd.tar.gz")
+        )
+
+def get_steamcmd_executable_path() -> str:
+    if CURR_OS == OS_Type.WINDOWS:
+        return os.path.join(STEAMCMD_DIR_PATH, "steamcmd.exe")
+    else:
+        return os.path.join(STEAMCMD_DIR_PATH, "steamcmd.sh")
+
 SERVER_DIR_PATH = os.path.join(BUILD_DIR_PATH, "server")
 CSTRIKE_DIR_PATH = os.path.join(SERVER_DIR_PATH, "cstrike")
 
-SOURCEMOD_DIR = os.path.join(CSTRIKE_DIR_PATH, "addons/sourcemod")
+def get_srcds_path() -> str:
+    if CURR_OS == OS_Type.WINDOWS:
+        return os.path.join(SERVER_DIR_PATH, "srcds.exe")
+    else:
+        return os.path.join(SERVER_DIR_PATH, "srcds_run")
+
+ADDONS_DIR_PATH = os.path.join(CSTRIKE_DIR_PATH, "addons")
+
+SOURCEMOD_DIR = os.path.join(ADDONS_DIR_PATH, "sourcemod")
 SOURCEMOD_SCRIPTING_DIR_PATH = os.path.join(SOURCEMOD_DIR, "scripting")
+SOURCEMOD_COMPILED_DIR_PATH = os.path.join(SOURCEMOD_SCRIPTING_DIR_PATH, "compiled")
 SOURCEMOD_PLUGINS_DIR_PATH = os.path.join(SOURCEMOD_DIR, "plugins")
 
 RESOURCES_DIR_PATH = os.path.join(BUILD_DIR_PATH, "resources")
@@ -271,36 +323,6 @@ ENABLED_PLUGINS = [
     # "admin-sql-threaded.smx",
     "antiflood.smx"
 ]
-
-def get_steamcmd_download_info() -> Download_Info:
-    if CURR_OS == OS_Type.WINDOWS:
-        return Download_Info(
-            "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip",
-            os.path.join(DOWNLOADS_DIR_PATH, "steamcmd.zip")
-        )
-    else:
-        return Download_Info(
-            "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz",
-            os.path.join(DOWNLOADS_DIR_PATH, "steamcmd.tar.gz")
-        )
-
-def get_steamcmd_executable_path() -> str:
-    if CURR_OS == OS_Type.WINDOWS:
-        return os.path.join(STEAMCMD_DIR_PATH, "steamcmd.exe")
-    else:
-        return os.path.join(STEAMCMD_DIR_PATH, "steamcmd.sh")
-
-def get_resource_path(resource: Resource) -> str:
-    path = ""
-
-    if resource.type == Resource_Type.CORE:
-        path = RESOURCES_CORE_DIR_PATH
-    elif resource.type == Resource_Type.EXTENSION:
-        path = RESOURCES_EXTENSIONS_DIR_PATH
-    else:
-        path = RESOURCES_PLUGINS_DIR_PATH
-
-    return os.path.join(path, resource.key)
 
 # Resources
 RESOURCES: List[Resource] = []
@@ -455,81 +477,93 @@ def install_server(reinstall = False):
 
     print("Counter Strike: Source Dedicated Server is successfully installed!")
 
-def download_resource(resource: Resource) -> None:
-    if not os.path.exists(resource.download_info.path):
-        download_file_and_log(resource.name, resource.download_info.url, resource.download_info.path)
-
-    path = get_resource_path(resource)
-    strip_top_level = False
-
-    if resource.unpack_info:
-        path = os.path.join(path, resource.unpack_info.relative_dir)
-        strip_top_level = resource.unpack_info.strip_top_level
-
-    if not os.path.isdir(path):
-        unpack_file_and_log(resource.name, resource.download_info.path, path, strip_top_level)
-    else:
-        print(f"{resource.name} is already downloaded.")
-
-    return
-
 def download_resources() -> None:
     for resource in RESOURCES:
-        download_resource(resource)
+        if not os.path.exists(resource.download_info.path):
+            download_file_and_log(resource.name, resource.download_info.url, resource.download_info.path)
 
-def merge_resource(resource: Resource) -> None:
-    path = get_resource_path(resource)
+        path = get_resource_path(resource)
+        strip_top_level = False
 
-    print(path)
+        if resource.unpack_info:
+            if resource.unpack_info.wrapper_path:
+                path = os.path.join(path, resource.unpack_info.wrapper_path)
 
-    merge_files(path, CSTRIKE_DIR_PATH)
+            strip_top_level = resource.unpack_info.strip_top_level
 
-    return
+        if not os.path.isdir(path):
+            unpack_file_and_log(resource.name, resource.download_info.path, path, strip_top_level)
+        else:
+            print(f"{resource.name} is already downloaded.")
+
+        time.sleep(1)
 
 def merge_resources() -> None:
+    if not os.path.isdir(SERVER_DIR_PATH):
+        print("Server is not installed.")
+        sys.exit(1)
+
     for resource in RESOURCES:
-        merge_resource(resource)
+        path = get_resource_path(resource)
+
+        print(f"Merging {resource.name}...")
+
+        merge_files(path, CSTRIKE_DIR_PATH)
+
+        time.sleep(1)
 
 def merge_overrides() -> None:
+    if not os.path.isdir(SERVER_DIR_PATH):
+        print("Server is not installed.")
+        sys.exit(1)
+
+    print(f"Merging {CORE_DIR_PATH}")
+
     merge_files(CORE_DIR_PATH, CSTRIKE_DIR_PATH)
 
     for name in os.listdir(PLUGINS_DIR_PATH):
+        print(f"Merging {os.path.join(PLUGINS_DIR_PATH, name)}")
+
         merge_files(os.path.join(PLUGINS_DIR_PATH, name), CSTRIKE_DIR_PATH)
 
 def build() -> None:
+    if not os.path.isdir(SERVER_DIR_PATH):
+        print("Server is not installed.")
+        sys.exit(1)
+
     merge_overrides()
 
     push_dir(SOURCEMOD_SCRIPTING_DIR_PATH)
+
+    print("Compiling plugins")
 
     if CURR_OS == OS_Type.WINDOWS:
         subprocess.run(["compile.exe"], input = b"\n")
     else:
         subprocess.run(["compile.sh"], input = b"\n")
 
+    print("\nCompilation finished")
+
     pop_dir()
 
     clear_directory(SOURCEMOD_PLUGINS_DIR_PATH)
 
-    compiled_dir = os.path.join(SOURCEMOD_SCRIPTING_DIR_PATH, "compiled")
-
     for plugin in ENABLED_PLUGINS:
+        print(f"Enabling plugin: {plugin}")
         shutil.copy(
-            os.path.join(compiled_dir, plugin),
+            os.path.join(SOURCEMOD_COMPILED_DIR_PATH, plugin),
             os.path.join(SOURCEMOD_PLUGINS_DIR_PATH, plugin)
         )
 
     return
 
 def start_lan() -> None:
-    path = ""
-
-    if CURR_OS == OS_Type.WINDOWS:
-        path = os.path.join(SERVER_DIR_PATH, "srcds.exe")
-    else:
-        path = os.path.join(SERVER_DIR_PATH, "srcds_run")
+    if not os.path.isdir(SERVER_DIR_PATH):
+        print("Server is not installed.")
+        sys.exit(1)
 
     subprocess.run([
-        path,
+        get_srcds_path(),
         "-game", "cstrike",
         "+map", "bhop_ambience",
         "+sv_lan", "1",
@@ -561,7 +595,16 @@ elif command == "download_resources":
     download_resources()
 elif command == "merge_resources":
     merge_resources()
+elif command == "download_and_merge_resources":
+    download_resources()
+    merge_resources()
 elif command == "build":
+    build()
+elif command == "install_all":
+    install_steamcmd()
+    install_server()
+    download_resources()
+    merge_resources()
     build()
 elif command == "start_lan":
     start_lan()
