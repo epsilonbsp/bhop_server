@@ -112,7 +112,7 @@ Main ideas of `build.py` script
 * Bhop Timer
 
       Source:  https://github.com/shavitush/bhoptimer
-      Release: https://github.com/shavitush/bhoptimer/archive/refs/tags/v4.0.1.zip
+      Release: https://github.com/shavitush/bhoptimer/releases/download/v4.0.1/bhoptimer-v4.0.1.zip
 
 * Jump Stats
 
