@@ -34,18 +34,15 @@ elif command == "install_server":
 elif command == "download_resources":
     download_resources()
 elif command == "merge_resources":
-    merge_resources()
+    merge_resources(arg0)
 elif command == "compile_resources":
     compile_resources(arg0)
-elif command == "merge_overrides":
-    merge_overrides()
 elif command == "install_all":
     install_steamcmd()
     install_server()
     download_resources()
-    compile_resources()
     merge_resources()
-    merge_overrides()
+    compile_resources()
 elif command == "start_lan":
     start_lan()
 else:

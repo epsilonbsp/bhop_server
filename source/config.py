@@ -10,7 +10,26 @@ from .resource import *
 BUILD_DIR_PATH = "build"
 COMPILED_DIR_PATH = os.path.join(BUILD_DIR_PATH, "compiled")
 DOWNLOADS_DIR_PATH = os.path.join(BUILD_DIR_PATH, "downloads")
-SCRIPTING_DIR_PATH = os.path.join("addons", "sourcemod", "scripting")
+
+# Relative paths in cstrike directory
+REL_ADDONS_DIR_PATH = "addons"
+REL_CFG_DIR_PATH = "cfg"
+REL_MAPS_DIR_PATH = "maps"
+REL_MATERIALS_DIR_PATH = "materials"
+REL_SOUND_DIR_PATH = "sound"
+
+REL_SOURCEMOD_DIR_PATH = os.path.join(REL_ADDONS_DIR_PATH, "sourcemod")
+REL_METAMOD_DIR_PATH = os.path.join(REL_ADDONS_DIR_PATH, "metamod")
+REL_STRIPPER_DIR_PATH = os.path.join(REL_ADDONS_DIR_PATH, "stripper")
+
+REL_SM_BIN_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "bin")
+REL_SM_CONFIGS_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "configs")
+REL_SM_DATA_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "data")
+REL_SM_EXTENSIONS_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "extensions")
+REL_SM_GAMEDATA_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "gamedata")
+REL_SM_PLUGINS_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "plugins")
+REL_SM_SCRIPTING_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "scripting")
+REL_SM_TRANSLATIONS_DIR_PATH = os.path.join(REL_SOURCEMOD_DIR_PATH, "translations")
 
 # SteamCMD
 STEAMCMD_DIR_PATH = os.path.join(BUILD_DIR_PATH, "steamcmd")
@@ -81,32 +100,41 @@ RESOURCES[Resource_Key.SOURCEMOD] = Resource(
     key = "sourcemod",
     name = "SourceMod",
     install_dir = os.path.join(RESOURCES_CORE_DIR_PATH, "sourcemod"),
-    merge_paths = [],
+    merge_paths = [
+        REL_METAMOD_DIR_PATH,
+        REL_CFG_DIR_PATH,
+        REL_SM_BIN_DIR_PATH,
+        REL_SM_CONFIGS_DIR_PATH,
+        REL_SM_DATA_DIR_PATH,
+        REL_SM_EXTENSIONS_DIR_PATH,
+        REL_SM_GAMEDATA_DIR_PATH,
+        REL_SM_TRANSLATIONS_DIR_PATH
+    ],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "admin-flatfile.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "adminhelp.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "adminmenu.sp"),
-        # os.path.join(SCRIPTING_DIR_PATH, "admin-sql-prefetch.sp"),
-        # os.path.join(SCRIPTING_DIR_PATH, "admin-sql-threaded.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "antiflood.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "basebans.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "basechat.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "basecomm.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "basecommands.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "basetriggers.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "basevotes.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "clientprefs.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "funcommands.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "funvotes.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "mapchooser.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "nextmap.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "nominations.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "playercommands.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "randomcycle.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "reservedslots.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "rockthevote.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "sounds.sp"),
-        # os.path.join(SCRIPTING_DIR_PATH, "sql-admin-manager.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "admin-flatfile.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "adminhelp.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "adminmenu.sp"),
+        # os.path.join(REL_SM_SCRIPTING_DIR_PATH, "admin-sql-prefetch.sp"),
+        # os.path.join(REL_SM_SCRIPTING_DIR_PATH, "admin-sql-threaded.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "antiflood.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "basebans.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "basechat.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "basecomm.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "basecommands.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "basetriggers.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "basevotes.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "clientprefs.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "funcommands.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "funvotes.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "mapchooser.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "nextmap.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "nominations.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "playercommands.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "randomcycle.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "reservedslots.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "rockthevote.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "sounds.sp"),
+        # os.path.join(REL_SM_SCRIPTING_DIR_PATH, "sql-admin-manager.sp")
     ],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
@@ -126,7 +154,9 @@ RESOURCES[Resource_Key.METAMOD_SOURCE] = Resource(
     key = "metamod_source",
     name = "Metamod:Source",
     install_dir = os.path.join(RESOURCES_CORE_DIR_PATH, "metamod_source"),
-    merge_paths = [],
+    merge_paths = [
+        REL_ADDONS_DIR_PATH
+    ],
     plugin_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
@@ -146,7 +176,9 @@ RESOURCES[Resource_Key.TICKRATE_ENABLER] = Resource(
     key = "tickrate_enabler",
     name = "Tickrate Enabler",
     install_dir = os.path.join(RESOURCES_CORE_DIR_PATH, "tickrate_enabler"),
-    merge_paths = [],
+    merge_paths = [
+        REL_ADDONS_DIR_PATH
+    ],
     plugin_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
@@ -166,7 +198,9 @@ RESOURCES[Resource_Key.BZIP2] = Resource(
     key = "bzip2",
     name = "Bzip2 Extension",
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "bzip2"),
-    merge_paths = [],
+    merge_paths = [
+        REL_ADDONS_DIR_PATH
+    ],
     plugin_paths = [],
     download_info = resolve_download_info({
         get_os_type(): Download_Info(
@@ -182,7 +216,9 @@ RESOURCES[Resource_Key.EVENTQUEUEFIXFIX] = Resource(
     key = "eventqueuefixfix",
     name = "Event Queue Fix Fix",
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "eventqueuefixfix"),
-    merge_paths = [],
+    merge_paths = [
+        REL_ADDONS_DIR_PATH
+    ],
     plugin_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
@@ -198,7 +234,9 @@ RESOURCES[Resource_Key.RIPEXT] = Resource(
     key = "ripext",
     name = "REST in Pawn Extension",
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "ripext"),
-    merge_paths = [],
+    merge_paths = [
+        REL_ADDONS_DIR_PATH
+    ],
     plugin_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
@@ -220,7 +258,7 @@ RESOURCES[Resource_Key.DYNAMIC_CHANNELS] = Resource(
     install_dir = os.path.join(RESOURCES_PLUGINS_DIR_PATH, "dynamic_channels"),
     merge_paths = [],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "DynamicChannels.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "DynamicChannels.sp"),
     ],
     download_info = resolve_download_info({
         get_os_type(): Download_Info(
@@ -236,25 +274,34 @@ RESOURCES[Resource_Key.BHOPTIMER] = Resource(
     key = "bhoptimer",
     name = "Bhop Timer",
     install_dir = os.path.join(PLUGINS_DIR_PATH, "bhoptimer"),
-    merge_paths = [],
+    merge_paths = [
+        REL_SM_CONFIGS_DIR_PATH,
+        REL_SM_EXTENSIONS_DIR_PATH,
+        REL_SM_GAMEDATA_DIR_PATH,
+        REL_SM_SCRIPTING_DIR_PATH,
+        REL_SM_TRANSLATIONS_DIR_PATH,
+        REL_STRIPPER_DIR_PATH,
+        REL_MATERIALS_DIR_PATH,
+        REL_SOUND_DIR_PATH,
+    ],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "eventqueuefix.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-chat.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-checkpoints.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-core.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-hud.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-mapchooser.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-misc.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-rankings.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-replay-playback.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-replay-recorder.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-sounds.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-stats.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-tas.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-timelimit.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-wr.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-zones.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "shavit-zones-json.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "eventqueuefix.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-chat.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-checkpoints.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-core.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-hud.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-mapchooser.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-misc.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-rankings.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-replay-playback.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-replay-recorder.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-sounds.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-stats.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-tas.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-timelimit.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-wr.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-zones.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-zones-json.sp")
     ],
     download_info = None,
     unpack_info = None
@@ -267,12 +314,12 @@ RESOURCES[Resource_Key.JUMPSTATS] = Resource(
     install_dir = os.path.join(PLUGINS_DIR_PATH, "jumpstats"),
     merge_paths = [],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "bhop-get-stats.sp"),
-        os.path.join(SCRIPTING_DIR_PATH, "jumpstats.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "bhop-get-stats.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "jumpstats.sp")
     ],
     include_paths = [
-        os.path.join(RESOURCES[Resource_Key.DYNAMIC_CHANNELS].install_dir, SCRIPTING_DIR_PATH, "include"),
-        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, SCRIPTING_DIR_PATH, "include")
+        os.path.join(RESOURCES[Resource_Key.DYNAMIC_CHANNELS].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include"),
+        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
     ],
     download_info = None,
     unpack_info = None
@@ -285,7 +332,7 @@ RESOURCES[Resource_Key.LANDFIX] = Resource(
     install_dir = os.path.join(PLUGINS_DIR_PATH, "landfix"),
     merge_paths = [],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "landfix.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "landfix.sp")
     ],
     download_info = None,
     unpack_info = None
@@ -296,13 +343,15 @@ RESOURCES[Resource_Key.MAPLOADER] = Resource(
     key = "maploader",
     name = "Map Loader",
     install_dir = os.path.join(PLUGINS_DIR_PATH, "maploader"),
-    merge_paths = [],
+    merge_paths = [
+        REL_SM_CONFIGS_DIR_PATH
+    ],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "maploader.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "maploader.sp")
     ],
     include_paths = [
-        os.path.join(RESOURCES[Resource_Key.BZIP2].install_dir, SCRIPTING_DIR_PATH, "include"),
-        os.path.join(RESOURCES[Resource_Key.RIPEXT].install_dir, SCRIPTING_DIR_PATH, "include")
+        os.path.join(RESOURCES[Resource_Key.BZIP2].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include"),
+        os.path.join(RESOURCES[Resource_Key.RIPEXT].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
     ],
     download_info = None,
     unpack_info = None
@@ -313,9 +362,11 @@ RESOURCES[Resource_Key.PUSH_FIX_DE] = Resource(
     key = "push_fix_de",
     name = "PushFix Definitive Edition",
     install_dir = os.path.join(PLUGINS_DIR_PATH, "push_fix_de"),
-    merge_paths = [],
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "pushfix_de.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "pushfix_de.sp")
     ],
     download_info = None,
     unpack_info = None
@@ -326,9 +377,11 @@ RESOURCES[Resource_Key.RNGFIX] = Resource(
     key = "rngfix",
     name = "RNG Fix",
     install_dir = os.path.join(PLUGINS_DIR_PATH, "rngfix"),
-    merge_paths = [],
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "rngfix.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "rngfix.sp")
     ],
     download_info = None,
     unpack_info = None
@@ -339,9 +392,12 @@ RESOURCES[Resource_Key.SHOW_PLAYER_CLIPS] = Resource(
     key = "show_player_clips",
     name = "Show Player Clips",
     install_dir = os.path.join(PLUGINS_DIR_PATH, "show_player_clips"),
-    merge_paths = [],
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH,
+        REL_SM_TRANSLATIONS_DIR_PATH
+    ],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "showplayerclips.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "showplayerclips.sp")
     ],
     download_info = None,
     unpack_info = None
@@ -354,17 +410,17 @@ RESOURCES[Resource_Key.SHOWTRIGGERS] = Resource(
     install_dir = os.path.join(PLUGINS_DIR_PATH, "showtriggers"),
     merge_paths = [],
     plugin_paths = [
-        os.path.join(SCRIPTING_DIR_PATH, "showtriggers.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "showtriggers.sp")
     ],
     download_info = None,
     unpack_info = None
 )
 
-SOURCEMOD_RESOURCE = RESOURCES[Resource_Key.SOURCEMOD]
-SOURCEMOD_RESOURCE_SCRIPTING_DIR_PATH = os.path.join(SOURCEMOD_RESOURCE.install_dir, SCRIPTING_DIR_PATH)
+SOURCEMOD_RES = RESOURCES[Resource_Key.SOURCEMOD]
+SOURCEMOD_RES_SCRIPTING_DIR_PATH = os.path.join(SOURCEMOD_RES.install_dir, REL_SM_SCRIPTING_DIR_PATH)
 
 def get_sourcemod_spcomp_path():
     if get_os_type() == OS_Type.WINDOWS:
-        return os.path.join(SOURCEMOD_RESOURCE_SCRIPTING_DIR_PATH, "spcomp64.exe")
+        return os.path.join(SOURCEMOD_RES_SCRIPTING_DIR_PATH, "spcomp64.exe")
 
-    return os.path.join(SOURCEMOD_RESOURCE_SCRIPTING_DIR_PATH, "spcomp64")
+    return os.path.join(SOURCEMOD_RES_SCRIPTING_DIR_PATH, "spcomp64")

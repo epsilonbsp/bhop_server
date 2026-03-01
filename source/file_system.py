@@ -4,15 +4,6 @@
 import os
 import shutil
 
-dir_stack = []
-
-def push_dir(path: str) -> None:
-    dir_stack.append(os.getcwd())
-    os.chdir(path)
-
-def pop_dir() -> None:
-    os.chdir(dir_stack.pop())
-
 def merge_files(from_dir: str, to_dir: str) -> None:
     for item in os.listdir(from_dir):
         src_path = os.path.join(from_dir, item)

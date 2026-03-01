@@ -95,7 +95,7 @@ def compile_resource(resource: Resource) -> None:
     if len(resource.plugin_paths) == 0:
         return
 
-    default_include_dir_path = os.path.join(resource.install_dir, SCRIPTING_DIR_PATH, "include")
+    default_include_dir_path = os.path.join(resource.install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
 
     for plugin_path in resource.plugin_paths:
         input_path = os.path.join(resource.install_dir, plugin_path)
@@ -107,50 +107,57 @@ def compile_resource(resource: Resource) -> None:
                 include_paths.append("-i")
                 include_paths.append(include_path)
 
+        print(f"Compiling {resource.name}...")
+
         subprocess.run([get_sourcemod_spcomp_path(), *include_paths, "-o", output_path, input_path])
 
-def compile_resources(key: str = "") -> None:
-    os.makedirs(COMPILED_DIR_PATH, exist_ok=True)
+def merge_resource(resource: Resource) -> None:
+    if len(resource.merge_paths) == 0:
+        print(f"No merge paths specified for {resource.name}.")
+
+        return
+
+    print(f"Merging {resource.name}...")
+
+    for merge_path in resource.merge_paths:
+        from_path = os.path.join(resource.install_dir, merge_path)
+        to_path = os.path.join(CSTRIKE_DIR_PATH, merge_path)
+
+        print(f"Merging from {from_path} to {to_path}")
+
+        os.makedirs(to_path, exist_ok = True)
+        merge_files(from_path, to_path)
+
+def merge_resources(key: str = "") -> None:
+    if not os.path.isdir(SERVER_DIR_PATH):
+        print("Server is not installed.")
+        sys.exit(1)
 
     for resource in RESOURCES.values():
         if key and resource.key != key:
             continue
 
-        if len(resource.plugin_paths) == 0:
-            continue
-
-        print(f"Compiling {resource.name}...")
-
-        compile_resource(resource)
-
-        print("")
-
-    print(f"Clearing {SOURCEMOD_PLUGINS_DIR_PATH}.")
-    print(f"Merging {COMPILED_DIR_PATH} into {SOURCEMOD_PLUGINS_DIR_PATH}.")
-    clear_dir(SOURCEMOD_PLUGINS_DIR_PATH)
-    merge_files(COMPILED_DIR_PATH, SOURCEMOD_PLUGINS_DIR_PATH)
-
-def merge_resource(resource: Resource) -> None:
-    if len(resource.merge_paths) == 0:
-        merge_files(resource.install_dir, CSTRIKE_DIR_PATH)
-
-def merge_resources() -> None:
-    if not os.path.isdir(SERVER_DIR_PATH):
-        print("Server is not installed.")
-        sys.exit(1)
-
-    for resource in RESOURCES.values():
-        print(f"Merging {resource.name}...")
-
         merge_resource(resource)
-
-def merge_overrides() -> None:
-    if not os.path.isdir(SERVER_DIR_PATH):
-        print("Server is not installed.")
-        sys.exit(1)
 
     print(f"Merging {CORE_DIR_PATH} into {CSTRIKE_DIR_PATH}.")
     merge_files(CORE_DIR_PATH, CSTRIKE_DIR_PATH)
+
+def compile_resources(key: str = "") -> None:
+    os.makedirs(COMPILED_DIR_PATH, exist_ok = True)
+
+    for resource in RESOURCES.values():
+        if key and resource.key != key:
+            continue
+
+        compile_resource(resource)
+
+    os.makedirs(SOURCEMOD_PLUGINS_DIR_PATH, exist_ok = True)
+
+    print(f"Clearing {SOURCEMOD_PLUGINS_DIR_PATH}.")
+    clear_dir(SOURCEMOD_PLUGINS_DIR_PATH)
+
+    print(f"Merging {COMPILED_DIR_PATH} into {SOURCEMOD_PLUGINS_DIR_PATH}.")
+    merge_files(COMPILED_DIR_PATH, SOURCEMOD_PLUGINS_DIR_PATH)
 
 def start_lan() -> None:
     if not os.path.isdir(SERVER_DIR_PATH):
