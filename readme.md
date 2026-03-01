@@ -123,6 +123,10 @@ Main ideas of `build.py` script
 
       Source: https://github.com/epsilonbsp/sm_maploader
 
+* Momentum Mod Surf Fix
+
+      Source: https://github.com/epsilonbsp/sm_maploader
+
 * PushFix Definitive Edition
 
       Source:  https://github.com/rumourA/PushFixDE

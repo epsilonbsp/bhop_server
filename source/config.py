@@ -88,6 +88,7 @@ class Resource_Key(IntEnum):
     JUMPSTATS = auto()
     LANDFIX = auto()
     MAPLOADER = auto()
+    MOM_SURF_FIX = auto()
     PUSH_FIX_DE = auto()
     RNGFIX = auto()
     SHOW_PLAYER_CLIPS = auto()
@@ -353,6 +354,22 @@ RESOURCES[Resource_Key.MAPLOADER] = Resource(
         os.path.join(RESOURCES[Resource_Key.BZIP2].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include"),
         os.path.join(RESOURCES[Resource_Key.RIPEXT].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
     ],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.MOM_SURF_FIX] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "mom_surf_fix",
+    name = "Momentum Mod Surf Fix",
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "mom_surf_fix"),
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "momsurffix2.sp")
+    ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
