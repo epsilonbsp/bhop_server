@@ -41,17 +41,14 @@ Main ideas of `build.py` script
 * Downloads core, extension and plugins specified in `RESOURCES` constant
 * Unpacks all of that into `build/resources`
 
+#### `python build.py merge_resources`
+* Merges all resources into `build/server/cstrike` directory
+
 #### `python build.py compile_resources`
 * Goes through all resources that are specified in `RESOURCES` constant
 * If resource has values in `plugin_paths`, it will attempt to compile them and put into `build/compiled`
 * After compilation clears `build/server/cstrike/addons/sourcemod/plugins` directory
 * Finally transfers all compiled plugins into `build/server/cstrike/addons/sourcemod/plugins` directory
-
-#### `python build.py merge_resources`
-* Merges all resources into `build/server/cstrike` directory
-
-#### `python build.py merge_overrides`
-* Merges contents of `core` directory into `build/server/cstrike` directory
 
 #### `python build.py install_all`
 * Single command to do everything specified above
