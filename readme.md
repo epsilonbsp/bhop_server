@@ -16,11 +16,11 @@ This setup allows to just download or clone repo, run few commands and have loca
 * Download or clone repo
 * Open terminal in `bhop_server` directory and run these commands
 
-      # Install SteamCMD, server, extensions, plugins
+      # Install SteamCMD, server, core, extensions, plugins
       python build.py install_all
 
       # Build plugins (if you make changes to plugins)
-      python build.py build
+      python build.py compile_resources
 
       # Start server
       python build.py start_lan
@@ -41,18 +41,17 @@ Main ideas of `build.py` script
 * Downloads core, extension and plugins specified in `RESOURCES` constant
 * Unpacks all of that into `build/resources`
 
-#### `python build.py merge_resources`
-* Merges contents of directories in `build/resources` into `build/server/cstrike` directory
-
-#### `python build.py download_and_merge_resources`
-* Both downloads and merges resources
-
-#### `python build.py build`
-* Merges contents of `core` and `plugins` directories into `build/server/cstrike`
-* Runs compilation executable in `build/server/cstrike/addons/sourcemod/scripting` directory
-* All plugins get compiled into `build/server/cstrike/addons/sourcemod/scripting/compiled` directory
+#### `python build.py compile_resources`
+* Goes through all resources that are specified in `RESOURCES` constant
+* If resource has values in `plugin_paths`, it will attempt to compile them and put into `build/compiled`
 * After compilation clears `build/server/cstrike/addons/sourcemod/plugins` directory
-* Finally transfers all plugins specified in `ENABLED_PLUGINS` constant from `compiled` directory to `plugins` directory
+* Finally transfers all compiled plugins into `build/server/cstrike/addons/sourcemod/plugins` directory
+
+#### `python build.py merge_resources`
+* Merges all resources into `build/server/cstrike` directory
+
+#### `python build.py merge_overrides`
+* Merges contents of `core` directory into `build/server/cstrike` directory
 
 #### `python build.py install_all`
 * Single command to do everything specified above
@@ -123,7 +122,7 @@ Main ideas of `build.py` script
       Source:  https://github.com/Haze1337/Landfix
       Release: https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
 
-* Map Downloader
+* Map Loader
 
       Source: https://github.com/epsilonbsp/sm_maploader
 
