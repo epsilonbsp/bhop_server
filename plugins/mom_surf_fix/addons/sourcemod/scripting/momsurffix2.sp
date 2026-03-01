@@ -71,8 +71,11 @@ void PROF_STOP(int idx)
 }
 
 #else
-#define PROF_START%1;
-#define PROF_STOP%1;
+// TODO: fix properly maybe
+// #define PROF_START%1;
+// #define PROF_STOP%1;
+void PROF_START() {}
+void PROF_STOP(int idx) {}
 #endif
 
 public void OnPluginStart()
