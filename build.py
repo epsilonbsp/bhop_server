@@ -20,11 +20,12 @@ argc = len(sys.argv)
 if argc < 2:
     print("No arguments specified")
     sys.exit(1)
-elif argc > 2:
+elif argc > 3:
     print("Too many arguments")
     sys.exit(1)
 
 command = sys.argv[1]
+arg0 = sys.argv[2] if argc > 2 else ""
 
 if command == "install_steamcmd":
     install_steamcmd()
@@ -35,7 +36,7 @@ elif command == "download_resources":
 elif command == "merge_resources":
     merge_resources()
 elif command == "compile_resources":
-    compile_resources()
+    compile_resources(arg0)
 elif command == "merge_overrides":
     merge_overrides()
 elif command == "install_all":
