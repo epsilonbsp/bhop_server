@@ -85,6 +85,7 @@ class Resource_Key(IntEnum):
     RIPEXT = auto()
     DYNAMIC_CHANNELS = auto()
     BHOPTIMER = auto()
+    HEAD_BUG_FIX = auto()
     JUMPSTATS = auto()
     LANDFIX = auto()
     MAPLOADER = auto()
@@ -307,6 +308,22 @@ RESOURCES[Resource_Key.BHOPTIMER] = Resource(
     download_info = None,
     unpack_info = None
 )
+
+# RESOURCES[Resource_Key.HEAD_BUG_FIX] = Resource(
+#     type = Resource_Type.PLUGIN,
+#     key = "head_bug_fix",
+#     name = "Head Bug Fix",
+#     install_dir = os.path.join(PLUGINS_DIR_PATH, "head_bug_fix"),
+#     merge_paths = [
+#         REL_SM_GAMEDATA_DIR_PATH
+#     ],
+#     plugin_paths = [
+#         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "headbugfix.sp")
+#     ],
+#     include_paths = [],
+#     download_info = None,
+#     unpack_info = None
+# )
 
 RESOURCES[Resource_Key.JUMPSTATS] = Resource(
     type = Resource_Type.PLUGIN,
