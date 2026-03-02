@@ -92,6 +92,9 @@ def download_resources() -> None:
         time.sleep(0.5)
 
 def compile_resource(resource: Resource) -> None:
+    if not os.path.isdir(resource.install_dir):
+        return
+
     if len(resource.plugin_paths) == 0:
         return
 
@@ -112,6 +115,9 @@ def compile_resource(resource: Resource) -> None:
         subprocess.run([get_sourcemod_spcomp_path(), *include_paths, "-o", output_path, input_path])
 
 def merge_resource(resource: Resource) -> None:
+    if not os.path.isdir(resource.install_dir):
+        return
+
     if len(resource.merge_paths) == 0:
         print(f"No merge paths specified for {resource.name}.")
 
