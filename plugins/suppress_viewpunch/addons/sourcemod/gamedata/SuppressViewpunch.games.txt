@@ -8,7 +8,7 @@
 			{
 				"library"		"server"
 				"linux"			"@_ZN13CGameMovement25PlayerRoughLandingEffectsEf.part.0"
-				"windows"		"\x55\x8B\xEC\x51\xF3\x0F\x10\x45\x08\x0F\x2F\x05"
+				"windows"		"\x55\x8B\xEC\xF3\x0F\x10\x45\x08\x83\xEC\x0C\x0F\x2F\x05"
 			}
 		}
 
