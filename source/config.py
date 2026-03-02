@@ -94,6 +94,7 @@ class Resource_Key(IntEnum):
     RNGFIX = auto()
     SHOW_PLAYER_CLIPS = auto()
     SHOWTRIGGERS = auto()
+    SUPPRESS_VIEWPUNCH = auto()
 
 RESOURCES: dict[int, Resource] = {}
 
@@ -445,6 +446,21 @@ RESOURCES[Resource_Key.SHOWTRIGGERS] = Resource(
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "showtriggers.sp")
+    ],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.SUPPRESS_VIEWPUNCH] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "suppress_viewpunch",
+    name = "Suppress Viewpunch",
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "suppress_viewpunch"),
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "SuppressViewpunch.sp")
     ],
     download_info = None,
     unpack_info = None

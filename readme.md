@@ -149,3 +149,7 @@ Main ideas of `build.py` script
 * Show Triggers
 
       Source: https://github.com/ecsr/showtriggers
+
+* Suppress Viewpunch
+
+      Source: https://github.com/xen-000/SuppressViewpunch
