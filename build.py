@@ -32,17 +32,26 @@ if command == "install_steamcmd":
 elif command == "install_server":
     install_server()
 elif command == "download_resources":
-    download_resources()
+    if arg0:
+        download_specific_resource(arg0)
+    else:
+        download_all_resources()
 elif command == "merge_resources":
-    merge_resources(arg0)
+    if arg0:
+        merge_specific_resource(arg0)
+    else:
+        merge_all_resources()
 elif command == "compile_resources":
-    compile_resources(arg0)
+    if arg0:
+        compile_specific_resource(arg0)
+    else:
+        compile_all_resources()
 elif command == "install_all":
     install_steamcmd()
     install_server()
-    download_resources()
-    merge_resources()
-    compile_resources()
+    download_all_resources()
+    merge_all_resources()
+    compile_all_resources()
 elif command == "start_lan":
     start_lan()
 else:

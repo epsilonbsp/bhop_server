@@ -85,11 +85,68 @@ def download_resource(resource: Resource) -> None:
     else:
         print(f"{resource.name} is already unpacked.")
 
-def download_resources() -> None:
+def download_all_resources() -> None:
     for resource in RESOURCES.values():
         download_resource(resource)
 
         time.sleep(0.5)
+
+def download_specific_resource(key: str) -> None:
+    for resource in RESOURCES.values():
+        if resource.key == key:
+            download_resource(resource)
+
+            return
+
+    print("Specified resource doesn't exist.")
+
+def merge_resource(resource: Resource) -> None:
+    if not os.path.isdir(resource.install_dir):
+        return
+
+    if len(resource.merge_paths) == 0:
+        print(f"No merge paths specified for {resource.name}.")
+
+        return
+
+    print(f"Merging {resource.name}...")
+
+    for merge_path in resource.merge_paths:
+        from_path = os.path.join(resource.install_dir, merge_path)
+        to_path = os.path.join(CSTRIKE_DIR_PATH, merge_path)
+
+        print(f"Merging from {from_path} to {to_path}")
+
+        os.makedirs(to_path, exist_ok = True)
+        merge_files(from_path, to_path)
+
+def merge_core_resource() -> None:
+    print(f"Merging {CORE_DIR_PATH} into {CSTRIKE_DIR_PATH}.")
+    merge_files(CORE_DIR_PATH, CSTRIKE_DIR_PATH)
+
+def merge_all_resources(key: str = "") -> None:
+    if not os.path.isdir(SERVER_DIR_PATH):
+        print("Server is not installed.")
+        sys.exit(1)
+
+    for resource in RESOURCES.values():
+        merge_resource(resource)
+
+    merge_core_resource()
+
+def merge_specific_resource(key: str) -> None:
+    if key == "core":
+        merge_core_resource()
+
+        return
+
+    for resource in RESOURCES.values():
+        if resource.key == key:
+            merge_resource(resource)
+
+            return
+
+    print("Specified resource doesn't exist.")
 
 def compile_resource(resource: Resource) -> None:
     if not os.path.isdir(resource.install_dir):
@@ -114,56 +171,32 @@ def compile_resource(resource: Resource) -> None:
 
         subprocess.run([get_sourcemod_spcomp_path(), *include_paths, "-o", output_path, input_path])
 
-def merge_resource(resource: Resource) -> None:
-    if not os.path.isdir(resource.install_dir):
-        return
-
-    if len(resource.merge_paths) == 0:
-        print(f"No merge paths specified for {resource.name}.")
-
-        return
-
-    print(f"Merging {resource.name}...")
-
-    for merge_path in resource.merge_paths:
-        from_path = os.path.join(resource.install_dir, merge_path)
-        to_path = os.path.join(CSTRIKE_DIR_PATH, merge_path)
-
-        print(f"Merging from {from_path} to {to_path}")
-
-        os.makedirs(to_path, exist_ok = True)
-        merge_files(from_path, to_path)
-
-def merge_resources(key: str = "") -> None:
-    if not os.path.isdir(SERVER_DIR_PATH):
-        print("Server is not installed.")
-        sys.exit(1)
-
-    for resource in RESOURCES.values():
-        if key and resource.key != key:
-            continue
-
-        merge_resource(resource)
-
-    print(f"Merging {CORE_DIR_PATH} into {CSTRIKE_DIR_PATH}.")
-    merge_files(CORE_DIR_PATH, CSTRIKE_DIR_PATH)
-
-def compile_resources(key: str = "") -> None:
-    os.makedirs(COMPILED_DIR_PATH, exist_ok = True)
-
-    for resource in RESOURCES.values():
-        if key and resource.key != key:
-            continue
-
-        compile_resource(resource)
-
-    os.makedirs(SOURCEMOD_PLUGINS_DIR_PATH, exist_ok = True)
-
+def merge_plugins() -> None:
     print(f"Clearing {SOURCEMOD_PLUGINS_DIR_PATH}.")
     clear_dir(SOURCEMOD_PLUGINS_DIR_PATH)
 
     print(f"Merging {COMPILED_DIR_PATH} into {SOURCEMOD_PLUGINS_DIR_PATH}.")
     merge_files(COMPILED_DIR_PATH, SOURCEMOD_PLUGINS_DIR_PATH)
+
+def compile_all_resources() -> None:
+    os.makedirs(COMPILED_DIR_PATH, exist_ok = True)
+
+    for resource in RESOURCES.values():
+        compile_resource(resource)
+
+    os.makedirs(SOURCEMOD_PLUGINS_DIR_PATH, exist_ok = True)
+
+    merge_plugins()
+
+def compile_specific_resource(key: str) -> None:
+    for resource in RESOURCES.values():
+        if resource.key == key:
+            compile_resource(resource)
+            merge_plugins()
+
+            return
+
+    print("Specified resource doesn't exist.")
 
 def start_lan() -> None:
     if not os.path.isdir(SERVER_DIR_PATH):
