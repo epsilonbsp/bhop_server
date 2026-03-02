@@ -81,6 +81,7 @@ class Resource_Key(IntEnum):
     METAMOD_SOURCE = auto()
     TICKRATE_ENABLER = auto()
     BZIP2 = auto()
+    CLOSESTPOS = auto()
     EVENTQUEUEFIXFIX = auto()
     RIPEXT = auto()
     DYNAMIC_CHANNELS = auto()
@@ -88,6 +89,7 @@ class Resource_Key(IntEnum):
     HEAD_BUG_FIX = auto()
     JUMPSTATS = auto()
     LANDFIX = auto()
+    LINE = auto()
     LJ_STATS = auto()
     MAPLOADER = auto()
     MOM_SURF_FIX = auto()
@@ -211,6 +213,28 @@ RESOURCES[Resource_Key.BZIP2] = Resource(
         get_os_type(): Download_Info(
             "https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip",
             os.path.join(DOWNLOADS_DIR_PATH, "bzip2.zip")
+        )
+    }),
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.CLOSESTPOS] = Resource(
+    type = Resource_Type.EXTENSION,
+    key = "closestpos",
+    name = "ClosestPos",
+    install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "closestpos"),
+    merge_paths = [
+        REL_SM_EXTENSIONS_DIR_PATH
+    ],
+    plugin_paths = [],
+    download_info = resolve_download_info({
+        OS_Type.WINDOWS: Download_Info(
+            "https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-windows-latest-620269a.zip",
+            os.path.join(DOWNLOADS_DIR_PATH, "closestpos.zip")
+        ),
+        OS_Type.LINUX: Download_Info(
+            "https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-ubuntu-22.04-f848dfc.zip",
+            os.path.join(DOWNLOADS_DIR_PATH, "closestpos.zip")
         )
     }),
     unpack_info = None
@@ -354,6 +378,24 @@ RESOURCES[Resource_Key.LANDFIX] = Resource(
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "landfix.sp")
+    ],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.LINE] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "line",
+    name = "Line",
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "line"),
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-line.sp")
+    ],
+    include_paths = [
+        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
     ],
     download_info = None,
     unpack_info = None

@@ -89,6 +89,12 @@ Main ideas of `build.py` script
       Source: https://github.com/epsilonbsp/sm_bzip2
       Both:   https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
 
+* ClosestPos
+
+      Source:  https://github.com/rtldg/sm_closestpos
+      Windows: https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-windows-latest-620269a.zip
+      Linux:   https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-ubuntu-22.04-f848dfc.zip
+
 * Event Queue Fix Fix
 
       Source:  https://github.com/srcwr/eventqueuefixfix
@@ -122,6 +128,10 @@ Main ideas of `build.py` script
 
       Source:  https://github.com/Haze1337/Landfix
       Release: https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
+
+* Line
+
+      Source: https://github.com/KawaiiClan/shavit-line-advanced
 
 * LJ Stats
 
