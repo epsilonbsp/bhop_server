@@ -153,3 +153,7 @@ Main ideas of `build.py` script
 * Suppress Viewpunch
 
       Source: https://github.com/xen-000/SuppressViewpunch
+
+* Syncstyle
+
+      Source: https://github.com/enimmy/shavit-syncstyle
