@@ -206,7 +206,7 @@ RESOURCES[Resource_Key.BZIP2] = Resource(
     name = "Bzip2 Extension",
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "bzip2"),
     merge_paths = [
-        REL_ADDONS_DIR_PATH
+        REL_SM_EXTENSIONS_DIR_PATH
     ],
     plugin_paths = [],
     download_info = resolve_download_info({
@@ -264,7 +264,8 @@ RESOURCES[Resource_Key.RIPEXT] = Resource(
     name = "REST in Pawn Extension",
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "ripext"),
     merge_paths = [
-        REL_ADDONS_DIR_PATH
+        REL_SM_CONFIGS_DIR_PATH,
+        REL_SM_EXTENSIONS_DIR_PATH
     ],
     plugin_paths = [],
     download_info = resolve_download_info({
@@ -307,7 +308,6 @@ RESOURCES[Resource_Key.BHOPTIMER] = Resource(
         REL_SM_CONFIGS_DIR_PATH,
         REL_SM_EXTENSIONS_DIR_PATH,
         REL_SM_GAMEDATA_DIR_PATH,
-        REL_SM_SCRIPTING_DIR_PATH,
         REL_SM_TRANSLATIONS_DIR_PATH,
         REL_STRIPPER_DIR_PATH,
         REL_MATERIALS_DIR_PATH,
