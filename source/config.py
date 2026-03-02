@@ -88,6 +88,7 @@ class Resource_Key(IntEnum):
     HEAD_BUG_FIX = auto()
     JUMPSTATS = auto()
     LANDFIX = auto()
+    LJ_STATS = auto()
     MAPLOADER = auto()
     MOM_SURF_FIX = auto()
     PUSH_FIX_DE = auto()
@@ -353,6 +354,22 @@ RESOURCES[Resource_Key.LANDFIX] = Resource(
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "landfix.sp")
+    ],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.LJ_STATS] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "lj_stats",
+    name = "LJ Stats",
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "lj_stats"),
+    merge_paths = [],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "kawaii-ljstats.sp")
+    ],
+    include_paths = [
+        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
     ],
     download_info = None,
     unpack_info = None

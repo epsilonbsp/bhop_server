@@ -123,6 +123,10 @@ Main ideas of `build.py` script
       Source:  https://github.com/Haze1337/Landfix
       Release: https://github.com/Haze1337/Landfix/archive/refs/tags/1.3.zip
 
+* LJ Stats
+
+      Source: https://github.com/KawaiiClan/LJStats
+
 * Map Loader
 
       Source: https://github.com/epsilonbsp/sm_maploader
