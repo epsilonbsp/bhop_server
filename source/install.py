@@ -62,6 +62,8 @@ def install_server(reinstall = False):
         "+quit"
     ])
 
+    shutil.copytree(CSTRIKE_DIR_PATH, os.path.join("build", "cstrike_backup"))
+
     print("Counter Strike: Source Dedicated Server is successfully installed!")
 
 def download_resource(resource: Resource) -> None:
