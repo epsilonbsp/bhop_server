@@ -1,5 +1,5 @@
 # Bhop Server
-My simple bhop server setup.
+My simple bhop server setup specifically for `Counter Strike: Source` game.
 
 This setup allows to just download or clone repo, run few commands and have local server working right away.
 
