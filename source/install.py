@@ -65,6 +65,9 @@ def install_server(reinstall = False):
     print("Counter Strike: Source Dedicated Server is successfully installed!")
 
 def download_resource(resource: Resource) -> None:
+    if not resource.enabled:
+        return
+
     if not resource.download_info:
         return
 
@@ -101,11 +104,14 @@ def download_specific_resource(key: str) -> None:
     print("Specified resource doesn't exist.")
 
 def merge_resource(resource: Resource) -> None:
+    if not resource.enabled:
+        return
+
     if not os.path.isdir(resource.install_dir):
         return
 
     if len(resource.merge_paths) == 0:
-        print(f"No merge paths specified for {resource.name}.")
+        print(f"No merge paths specified for {resource.name}.\n")
 
         return
 
@@ -120,11 +126,13 @@ def merge_resource(resource: Resource) -> None:
         os.makedirs(to_path, exist_ok = True)
         merge_files(from_path, to_path)
 
+    print("")
+
 def merge_core_resource() -> None:
     print(f"Merging {CORE_DIR_PATH} into {CSTRIKE_DIR_PATH}.")
     merge_files(CORE_DIR_PATH, CSTRIKE_DIR_PATH)
 
-def merge_all_resources(key: str = "") -> None:
+def merge_all_resources() -> None:
     if not os.path.isdir(SERVER_DIR_PATH):
         print("Server is not installed.")
         sys.exit(1)
@@ -149,6 +157,9 @@ def merge_specific_resource(key: str) -> None:
     print("Specified resource doesn't exist.")
 
 def compile_resource(resource: Resource) -> None:
+    if not resource.enabled:
+        return
+
     if not os.path.isdir(resource.install_dir):
         return
 

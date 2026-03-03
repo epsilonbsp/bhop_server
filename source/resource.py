@@ -26,10 +26,11 @@ class Resource:
     type: Resource_Type
     key: str
     name: str
+    enabled: bool
     install_dir: str
     merge_paths: List[str]
     plugin_paths: List[str]
-    include_paths: List[str] = field(default_factory = list)
+    include_paths: List[str]
     download_info: Download_Info|None = None
     unpack_info: Unpack_Info|None = None
 

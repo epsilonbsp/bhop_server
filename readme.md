@@ -37,14 +37,14 @@ Main ideas of `build.py` script
 #### `python build.py install_server`
 * Installs `Counter Strike: Source Dedicated Server` app using SteamCMD
 
-#### `python build.py download_resources`
+#### `python build.py download_resources [key]`
 * Downloads core, extension and plugins specified in `RESOURCES` constant
 * Unpacks all of that into `build/resources`
 
-#### `python build.py merge_resources`
+#### `python build.py merge_resources [key]`
 * Merges all resources into `build/server/cstrike` directory
 
-#### `python build.py compile_resources`
+#### `python build.py compile_resources [key]`
 * Goes through all resources that are specified in `RESOURCES` constant
 * If resource has values in `plugin_paths`, it will attempt to compile them and put into `build/compiled`
 * After compilation clears `build/server/cstrike/addons/sourcemod/plugins` directory

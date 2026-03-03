@@ -106,6 +106,7 @@ RESOURCES[Resource_Key.SOURCEMOD] = Resource(
     type = Resource_Type.CORE,
     key = "sourcemod",
     name = "SourceMod",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_CORE_DIR_PATH, "sourcemod"),
     merge_paths = [
         REL_METAMOD_DIR_PATH,
@@ -143,6 +144,7 @@ RESOURCES[Resource_Key.SOURCEMOD] = Resource(
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "sounds.sp"),
         # os.path.join(REL_SM_SCRIPTING_DIR_PATH, "sql-admin-manager.sp")
     ],
+    include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
             "https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7221-windows.zip",
@@ -160,11 +162,13 @@ RESOURCES[Resource_Key.METAMOD_SOURCE] = Resource(
     type = Resource_Type.CORE,
     key = "metamod_source",
     name = "Metamod:Source",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_CORE_DIR_PATH, "metamod_source"),
     merge_paths = [
         REL_ADDONS_DIR_PATH
     ],
     plugin_paths = [],
+    include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
             "https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1219-windows.zip",
@@ -182,11 +186,13 @@ RESOURCES[Resource_Key.TICKRATE_ENABLER] = Resource(
     type = Resource_Type.CORE,
     key = "tickrate_enabler",
     name = "Tickrate Enabler",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_CORE_DIR_PATH, "tickrate_enabler"),
     merge_paths = [
         REL_ADDONS_DIR_PATH
     ],
     plugin_paths = [],
+    include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
             "https://github.com/idk1703/TickrateEnabler/releases/download/v0.5-latest/TickrateEnabler-win-tick100-6e83b42.zip",
@@ -204,11 +210,13 @@ RESOURCES[Resource_Key.BZIP2] = Resource(
     type = Resource_Type.EXTENSION,
     key = "bzip2",
     name = "Bzip2 Extension",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "bzip2"),
     merge_paths = [
         REL_SM_EXTENSIONS_DIR_PATH
     ],
     plugin_paths = [],
+    include_paths = [],
     download_info = resolve_download_info({
         get_os_type(): Download_Info(
             "https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip",
@@ -222,11 +230,13 @@ RESOURCES[Resource_Key.CLOSESTPOS] = Resource(
     type = Resource_Type.EXTENSION,
     key = "closestpos",
     name = "ClosestPos",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "closestpos"),
     merge_paths = [
         REL_SM_EXTENSIONS_DIR_PATH
     ],
     plugin_paths = [],
+    include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
             "https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-windows-latest-620269a.zip",
@@ -244,11 +254,13 @@ RESOURCES[Resource_Key.EVENTQUEUEFIXFIX] = Resource(
     type = Resource_Type.EXTENSION,
     key = "eventqueuefixfix",
     name = "Event Queue Fix Fix",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "eventqueuefixfix"),
     merge_paths = [
         REL_ADDONS_DIR_PATH
     ],
     plugin_paths = [],
+    include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
             "https://github.com/srcwr/eventqueuefixfix/releases/download/v1.0.1/eventqueuefixfix-v1.0.1-def5b0e-windows-x32.zip",
@@ -262,12 +274,14 @@ RESOURCES[Resource_Key.RIPEXT] = Resource(
     type = Resource_Type.EXTENSION,
     key = "ripext",
     name = "REST in Pawn Extension",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_EXTENSIONS_DIR_PATH, "ripext"),
     merge_paths = [
         REL_SM_CONFIGS_DIR_PATH,
         REL_SM_EXTENSIONS_DIR_PATH
     ],
     plugin_paths = [],
+    include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
             "https://github.com/ErikMinekus/sm-ripext/releases/download/1.3.2/sm-ripext-1.3.2-windows.zip",
@@ -285,11 +299,13 @@ RESOURCES[Resource_Key.DYNAMIC_CHANNELS] = Resource(
     type = Resource_Type.PLUGIN,
     key = "dynamic_channels",
     name = "Dynamic Channels Plugin",
+    enabled = True,
     install_dir = os.path.join(RESOURCES_PLUGINS_DIR_PATH, "dynamic_channels"),
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "DynamicChannels.sp"),
     ],
+    include_paths = [],
     download_info = resolve_download_info({
         get_os_type(): Download_Info(
             "https://github.com/Vauff/DynamicChannels/archive/refs/heads/master.zip",
@@ -303,6 +319,7 @@ RESOURCES[Resource_Key.BHOPTIMER] = Resource(
     type = Resource_Type.PLUGIN,
     key = "bhoptimer",
     name = "Bhop Timer",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "bhoptimer"),
     merge_paths = [
         REL_SM_CONFIGS_DIR_PATH,
@@ -332,30 +349,33 @@ RESOURCES[Resource_Key.BHOPTIMER] = Resource(
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-zones.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-zones-json.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
 
-# RESOURCES[Resource_Key.HEAD_BUG_FIX] = Resource(
-#     type = Resource_Type.PLUGIN,
-#     key = "head_bug_fix",
-#     name = "Head Bug Fix",
-#     install_dir = os.path.join(PLUGINS_DIR_PATH, "head_bug_fix"),
-#     merge_paths = [
-#         REL_SM_GAMEDATA_DIR_PATH
-#     ],
-#     plugin_paths = [
-#         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "headbugfix.sp")
-#     ],
-#     include_paths = [],
-#     download_info = None,
-#     unpack_info = None
-# )
+RESOURCES[Resource_Key.HEAD_BUG_FIX] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "head_bug_fix",
+    name = "Head Bug Fix",
+    enabled = False,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "head_bug_fix"),
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "headbugfix.sp")
+    ],
+    include_paths = [],
+    download_info = None,
+    unpack_info = None
+)
 
 RESOURCES[Resource_Key.JUMPSTATS] = Resource(
     type = Resource_Type.PLUGIN,
     key = "jumpstats",
     name = "Jump Stats",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "jumpstats"),
     merge_paths = [],
     plugin_paths = [
@@ -374,11 +394,13 @@ RESOURCES[Resource_Key.LANDFIX] = Resource(
     type = Resource_Type.PLUGIN,
     key = "landfix",
     name = "Land Fix",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "landfix"),
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "landfix.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
@@ -387,6 +409,7 @@ RESOURCES[Resource_Key.LINE] = Resource(
     type = Resource_Type.PLUGIN,
     key = "line",
     name = "Line",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "line"),
     merge_paths = [
         REL_SM_GAMEDATA_DIR_PATH
@@ -405,6 +428,7 @@ RESOURCES[Resource_Key.LJ_STATS] = Resource(
     type = Resource_Type.PLUGIN,
     key = "lj_stats",
     name = "LJ Stats",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "lj_stats"),
     merge_paths = [],
     plugin_paths = [
@@ -421,6 +445,7 @@ RESOURCES[Resource_Key.MAPLOADER] = Resource(
     type = Resource_Type.PLUGIN,
     key = "maploader",
     name = "Map Loader",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "maploader"),
     merge_paths = [
         REL_SM_CONFIGS_DIR_PATH
@@ -440,6 +465,7 @@ RESOURCES[Resource_Key.MOM_SURF_FIX] = Resource(
     type = Resource_Type.PLUGIN,
     key = "mom_surf_fix",
     name = "Momentum Mod Surf Fix",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "mom_surf_fix"),
     merge_paths = [
         REL_SM_GAMEDATA_DIR_PATH
@@ -456,6 +482,7 @@ RESOURCES[Resource_Key.PUSH_FIX_DE] = Resource(
     type = Resource_Type.PLUGIN,
     key = "push_fix_de",
     name = "PushFix Definitive Edition",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "push_fix_de"),
     merge_paths = [
         REL_SM_GAMEDATA_DIR_PATH
@@ -463,6 +490,7 @@ RESOURCES[Resource_Key.PUSH_FIX_DE] = Resource(
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "pushfix_de.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
@@ -471,6 +499,7 @@ RESOURCES[Resource_Key.RNGFIX] = Resource(
     type = Resource_Type.PLUGIN,
     key = "rngfix",
     name = "RNG Fix",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "rngfix"),
     merge_paths = [
         REL_SM_GAMEDATA_DIR_PATH
@@ -478,6 +507,7 @@ RESOURCES[Resource_Key.RNGFIX] = Resource(
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "rngfix.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
@@ -486,6 +516,7 @@ RESOURCES[Resource_Key.SHOW_PLAYER_CLIPS] = Resource(
     type = Resource_Type.PLUGIN,
     key = "show_player_clips",
     name = "Show Player Clips",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "show_player_clips"),
     merge_paths = [
         REL_SM_GAMEDATA_DIR_PATH,
@@ -494,6 +525,7 @@ RESOURCES[Resource_Key.SHOW_PLAYER_CLIPS] = Resource(
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "showplayerclips.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
@@ -502,11 +534,13 @@ RESOURCES[Resource_Key.SHOWTRIGGERS] = Resource(
     type = Resource_Type.PLUGIN,
     key = "showtriggers",
     name = "Show Triggers",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "showtriggers"),
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "showtriggers.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
@@ -515,6 +549,7 @@ RESOURCES[Resource_Key.SUPPRESS_VIEWPUNCH] = Resource(
     type = Resource_Type.PLUGIN,
     key = "suppress_viewpunch",
     name = "Suppress Viewpunch",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "suppress_viewpunch"),
     merge_paths = [
         REL_SM_GAMEDATA_DIR_PATH
@@ -522,6 +557,7 @@ RESOURCES[Resource_Key.SUPPRESS_VIEWPUNCH] = Resource(
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "SuppressViewpunch.sp")
     ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
@@ -530,6 +566,7 @@ RESOURCES[Resource_Key.SYNCSTYLE] = Resource(
     type = Resource_Type.PLUGIN,
     key = "syncstyle",
     name = "Syncstyle",
+    enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "syncstyle"),
     merge_paths = [],
     plugin_paths = [
