@@ -78,6 +78,8 @@ def download_resource(resource: Resource) -> None:
     else:
         print(f"{resource.name} is already downloaded.")
 
+    print("")
+
     path = resource.install_dir
     strip_top_level = False
 
@@ -89,6 +91,8 @@ def download_resource(resource: Resource) -> None:
         unpack_file_and_log(resource.name, resource.download_info.path, path, strip_top_level)
     else:
         print(f"{resource.name} is already unpacked.")
+
+    print("")
 
 def download_all_resources() -> None:
     for resource in RESOURCES.values():
