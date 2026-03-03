@@ -94,14 +94,14 @@ def download_all_resources() -> None:
 
         time.sleep(0.5)
 
-def download_specific_resource(key: str) -> None:
+def download_one_resource(key: str) -> None:
     for resource in RESOURCES.values():
         if resource.key == key:
             download_resource(resource)
 
             return
 
-    print("Specified resource doesn't exist.")
+    print("ERROR: Specified resource doesn't exist.")
 
 def merge_resource(resource: Resource) -> None:
     if not resource.enabled:
@@ -134,7 +134,7 @@ def merge_core_resource() -> None:
 
 def merge_all_resources() -> None:
     if not os.path.isdir(SERVER_DIR_PATH):
-        print("Server is not installed.")
+        print("ERROR: Server is not installed.")
         sys.exit(1)
 
     for resource in RESOURCES.values():
@@ -142,7 +142,7 @@ def merge_all_resources() -> None:
 
     merge_core_resource()
 
-def merge_specific_resource(key: str) -> None:
+def merge_one_resource(key: str) -> None:
     if key == "core":
         merge_core_resource()
 
@@ -154,7 +154,7 @@ def merge_specific_resource(key: str) -> None:
 
             return
 
-    print("Specified resource doesn't exist.")
+    print("ERROR: Specified resource doesn't exist.")
 
 def compile_resource(resource: Resource) -> None:
     if not resource.enabled:
@@ -166,11 +166,29 @@ def compile_resource(resource: Resource) -> None:
     if len(resource.plugin_paths) == 0:
         return
 
+    print(f"Compiling {resource.name}...")
+
     default_include_dir_path = os.path.join(resource.install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
 
     for plugin_path in resource.plugin_paths:
         input_path = os.path.join(resource.install_dir, plugin_path)
+
+        if not os.path.exists(input_path):
+            print(f"ERROR: file doesn't exist: {input_path}")
+
+            sys.exit(1)
+
         output_path = os.path.join(COMPILED_DIR_PATH, os.path.basename(plugin_path).rsplit(".sp", 1)[0] + ".smx")
+
+        if os.path.exists(output_path):
+            input_mtime = os.path.getmtime(input_path)
+            output_mtime = os.path.getmtime(output_path)
+
+            if output_mtime >= input_mtime:
+                print(f"Skipping: {plugin_path} - Already compiled")
+
+                continue
+
         include_paths = ["-i", default_include_dir_path]
 
         if len(resource.include_paths) > 0:
@@ -178,11 +196,19 @@ def compile_resource(resource: Resource) -> None:
                 include_paths.append("-i")
                 include_paths.append(include_path)
 
-        print(f"Compiling {resource.name}...")
+        try:
+            subprocess.run(
+                [get_sourcemod_spcomp_path(), *include_paths, "-o", output_path, input_path],
+                check=True
+            )
+        except subprocess.CalledProcessError:
+            sys.exit(1)
 
-        subprocess.run([get_sourcemod_spcomp_path(), *include_paths, "-o", output_path, input_path])
+    print("")
 
 def merge_plugins() -> None:
+    os.makedirs(SOURCEMOD_PLUGINS_DIR_PATH, exist_ok = True)
+
     print(f"Clearing {SOURCEMOD_PLUGINS_DIR_PATH}.")
     clear_dir(SOURCEMOD_PLUGINS_DIR_PATH)
 
@@ -195,11 +221,9 @@ def compile_all_resources() -> None:
     for resource in RESOURCES.values():
         compile_resource(resource)
 
-    os.makedirs(SOURCEMOD_PLUGINS_DIR_PATH, exist_ok = True)
-
     merge_plugins()
 
-def compile_specific_resource(key: str) -> None:
+def compile_one_resource(key: str) -> None:
     for resource in RESOURCES.values():
         if resource.key == key:
             compile_resource(resource)
@@ -207,7 +231,7 @@ def compile_specific_resource(key: str) -> None:
 
             return
 
-    print("Specified resource doesn't exist.")
+    print("ERROR: Specified resource doesn't exist.")
 
 def start_lan() -> None:
     if not os.path.isdir(SERVER_DIR_PATH):
