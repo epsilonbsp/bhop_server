@@ -160,6 +160,10 @@ Main ideas of `build.py` script
 
       Source: https://github.com/epsilonbsp/sm_maploader
 
+* Paint
+
+      Source: https://github.com/epsilonbsp/sm_paint
+
 * PushFix Definitive Edition
 
       Source:  https://github.com/rumourA/PushFixDE

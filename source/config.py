@@ -93,6 +93,7 @@ class Resource_Key(IntEnum):
     LJ_STATS = auto()
     MAPLOADER = auto()
     MOM_SURF_FIX = auto()
+    PAINT = auto()
     PUSH_FIX_DE = auto()
     RNGFIX = auto()
     SHOW_PLAYER_CLIPS = auto()
@@ -472,6 +473,23 @@ RESOURCES[Resource_Key.MOM_SURF_FIX] = Resource(
     ],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "momsurffix2.sp")
+    ],
+    include_paths = [],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.PAINT] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "paint",
+    name = "Paint",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "paint"),
+    merge_paths = [
+        REL_MATERIALS_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "paint.sp")
     ],
     include_paths = [],
     download_info = None,
