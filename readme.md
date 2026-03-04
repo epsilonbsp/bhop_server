@@ -25,6 +25,9 @@ This setup allows to just download or clone repo, run few commands and have loca
       # Start server
       python build.py start_lan
 
+      # Start FastDL server
+      python build.py start_fastdl
+
 ## Script Documentation
 Main ideas of `build.py` script
 * Programmatically assemble a bhop server with collection of extensions and plugins
@@ -64,6 +67,9 @@ Main ideas of `build.py` script
 
 #### `python build.py start_lan`
 * Starts LAN server in console mode
+
+#### `python build.py start_fastdl`
+* Starts FastDL server, so you can download files faster
 
 ## References
 ### SteamCMD

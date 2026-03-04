@@ -63,6 +63,8 @@ elif command == "install_all":
     compile_all_resources()
 elif command == "start_lan":
     start_lan()
+elif command == "start_fastdl":
+    start_fastdl()
 else:
     print("No valid command specified")
     sys.exit(1)
