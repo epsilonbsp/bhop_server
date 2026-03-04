@@ -158,7 +158,7 @@ Main ideas of `build.py` script
 
 * Momentum Mod Surf Fix
 
-      Source: https://github.com/epsilonbsp/sm_maploader
+      Source: https://github.com/GAMMACASE/MomSurfFix
 
 * Paint
 
