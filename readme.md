@@ -200,10 +200,12 @@ Main ideas of `build.py` script
       Source: https://github.com/Haze1337/Sound-Manager
       Release: https://github.com/Haze1337/Sound-Manager/archive/refs/tags/v1.0.5.zip
 
+* Styles
+
+      Autosync: https://github.com/enimmy/shavit-syncstyle
+      Doublejump: https://github.com/PMArkive/random-shavit-bhoptimer-stuff/blob/main/shavit-style-doublejump.sp
+      Parkour: https://github.com/PMArkive/random-shavit-bhoptimer-stuff/blob/main/parkour.sp
+
 * Suppress Viewpunch
 
       Source: https://github.com/xen-000/SuppressViewpunch
-
-* Syncstyle
-
-      Source: https://github.com/enimmy/shavit-syncstyle
