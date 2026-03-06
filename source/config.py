@@ -94,6 +94,7 @@ class Resource_Key(IntEnum):
     LJ_STATS = auto()
     MAPLOADER = auto()
     MOM_SURF_FIX = auto()
+    MPBHOPS = auto()
     PAINT = auto()
     PUSH_FIX_DE = auto()
     RNGFIX = auto()
@@ -491,6 +492,23 @@ RESOURCES[Resource_Key.MOM_SURF_FIX] = Resource(
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "momsurffix2.sp")
     ],
     include_paths = [],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.MPBHOPS] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "mpbhops",
+    name = "MPBHOPS, BUT WORKING",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "mpbhops"),
+    merge_paths = [],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "mpbhops_but_working.sp")
+    ],
+    include_paths = [
+        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
+    ],
     download_info = None,
     unpack_info = None
 )
