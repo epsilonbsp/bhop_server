@@ -96,6 +96,7 @@ class Resource_Key(IntEnum):
     MAPLOADER = auto()
     MOM_SURF_FIX = auto()
     MPBHOPS = auto()
+    NOSLIDE = auto()
     PAINT = auto()
     PUSH_FIX_DE = auto()
     RNGFIX = auto()
@@ -524,6 +525,25 @@ RESOURCES[Resource_Key.MPBHOPS] = Resource(
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "mpbhops_but_working.sp")
+    ],
+    include_paths = [
+        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
+    ],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.NOSLIDE] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "noslide",
+    name = "No Slide",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "noslide"),
+    merge_paths = [
+        REL_SM_CONFIGS_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "noslide.sp")
     ],
     include_paths = [
         os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
