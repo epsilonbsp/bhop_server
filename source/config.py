@@ -86,6 +86,7 @@ class Resource_Key(IntEnum):
     RIPEXT = auto()
     DYNAMIC_CHANNELS = auto()
     BHOPTIMER = auto()
+    GAP = auto()
     HEAD_BUG_FIX = auto()
     JUMPSTATS = auto()
     LANDFIX = auto()
@@ -349,6 +350,21 @@ RESOURCES[Resource_Key.BHOPTIMER] = Resource(
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-wr.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-zones.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-zones-json.sp")
+    ],
+    include_paths = [],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.GAP] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "gap",
+    name = "Gap",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "gap"),
+    merge_paths = [],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "gap.sp")
     ],
     include_paths = [],
     download_info = None,
