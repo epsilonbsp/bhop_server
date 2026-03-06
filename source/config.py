@@ -59,6 +59,7 @@ ADDONS_DIR_PATH = os.path.join(CSTRIKE_DIR_PATH, "addons")
 SOURCEMOD_DIR_PATH = os.path.join(ADDONS_DIR_PATH, "sourcemod")
 SOURCEMOD_SCRIPTING_DIR_PATH = os.path.join(SOURCEMOD_DIR_PATH, "scripting")
 SOURCEMOD_PLUGINS_DIR_PATH = os.path.join(SOURCEMOD_DIR_PATH, "plugins")
+MAPS_DIR_PATH = os.path.join(CSTRIKE_DIR_PATH, "maps")
 
 def get_srcds_path() -> str:
     if get_os_type() == OS_Type.WINDOWS:
