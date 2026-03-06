@@ -91,6 +91,7 @@ class Resource_Key(IntEnum):
     JUMPSTATS = auto()
     LANDFIX = auto()
     LINE = auto()
+    LINUX_FILE_LOWERCASER = auto()
     LJ_STATS = auto()
     MAPLOADER = auto()
     MOM_SURF_FIX = auto()
@@ -438,6 +439,23 @@ RESOURCES[Resource_Key.LINE] = Resource(
     include_paths = [
         os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
     ],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.LINUX_FILE_LOWERCASER] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "linux_file_lowercaser",
+    name = "Linux File Lowercaser",
+    enabled = get_os_type() == OS_Type.LINUX,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "linux_file_lowercaser"),
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "linux_file_lowercaser.sp")
+    ],
+    include_paths = [],
     download_info = None,
     unpack_info = None
 )
