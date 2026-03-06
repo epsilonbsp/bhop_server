@@ -88,6 +88,7 @@ class Resource_Key(IntEnum):
     DYNAMIC_CHANNELS = auto()
     BHOPTIMER = auto()
     FEET = auto()
+    FUN = auto()
     GAP = auto()
     HEAD_BUG_FIX = auto()
     JUMPSTATS = auto()
@@ -371,6 +372,24 @@ RESOURCES[Resource_Key.FEET] = Resource(
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "feet.sp")
+    ],
+    include_paths = [],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.FUN] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "fun",
+    name = "Fun",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "fun"),
+    merge_paths = [
+        REL_SM_CONFIGS_DIR_PATH,
+        REL_SOUND_DIR_PATH,
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "fun_sounds.sp")
     ],
     include_paths = [],
     download_info = None,
