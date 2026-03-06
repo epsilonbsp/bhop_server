@@ -39,7 +39,7 @@ elif command == "download_resource":
         sys.exit(1)
 
     download_one_resource(arg0)
-elif command == "merge_resources":
+elif command == "merge_all_resources":
     merge_all_resources()
 elif command == "merge_resource":
     if not arg0:

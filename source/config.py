@@ -143,7 +143,7 @@ RESOURCES[Resource_Key.SOURCEMOD] = Resource(
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "funcommands.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "funvotes.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "mapchooser.sp"),
-        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "nextmap.sp"),
+        # os.path.join(REL_SM_SCRIPTING_DIR_PATH, "nextmap.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "nominations.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "playercommands.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "randomcycle.sp"),
@@ -556,9 +556,7 @@ RESOURCES[Resource_Key.NOSLIDE] = Resource(
     name = "No Slide",
     enabled = True,
     install_dir = os.path.join(PLUGINS_DIR_PATH, "noslide"),
-    merge_paths = [
-        REL_SM_CONFIGS_DIR_PATH
-    ],
+    merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "noslide.sp")
     ],

@@ -132,6 +132,10 @@ def merge_resource(resource: Resource) -> None:
 
         print(f"Merging from {from_path} to {to_path}")
 
+        if not os.path.exists(from_path):
+            print(f"ERROR: Specified path does not exist: {from_path}")
+            sys.exit(1)
+
         os.makedirs(to_path, exist_ok = True)
         merge_files(from_path, to_path)
 
@@ -226,6 +230,21 @@ def merge_plugins() -> None:
     clear_dir(SOURCEMOD_PLUGINS_DIR_PATH)
 
     print(f"Merging {COMPILED_DIR_PATH} into {SOURCEMOD_PLUGINS_DIR_PATH}.")
+
+    enabled_plugins: dict[str, bool] = {}
+
+    for resource in RESOURCES.values():
+        for plugin_path in resource.plugin_paths:
+            enabled_plugins[os.path.basename(plugin_path)] = True
+
+    if os.path.isdir(COMPILED_DIR_PATH):
+        for filename in os.listdir(COMPILED_DIR_PATH):
+            sp_name = filename.rsplit(".smx", 1)[0] + ".sp"
+
+            if sp_name not in enabled_plugins:
+                print("Removing disabled plugin: ", filename)
+                os.remove(os.path.join(COMPILED_DIR_PATH, filename))
+
     merge_files(COMPILED_DIR_PATH, SOURCEMOD_PLUGINS_DIR_PATH)
 
 def compile_all_resources() -> None:
