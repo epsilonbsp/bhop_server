@@ -102,8 +102,8 @@ class Resource_Key(IntEnum):
     SHOW_PLAYER_CLIPS = auto()
     SHOWTRIGGERS = auto()
     SOUND_MANAGER = auto()
+    STYLES = auto()
     SUPPRESS_VIEWPUNCH = auto()
-    SYNCSTYLE = auto()
 
 RESOURCES: dict[int, Resource] = {}
 
@@ -633,6 +633,25 @@ RESOURCES[Resource_Key.SOUND_MANAGER] = Resource(
     unpack_info = None
 )
 
+RESOURCES[Resource_Key.STYLES] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "styles",
+    name = "Styles",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "styles"),
+    merge_paths = [],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "doublejump.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "parkour.sp"),
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "syncstyle.sp")
+    ],
+    include_paths = [
+        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
+    ],
+    download_info = None,
+    unpack_info = None
+)
+
 RESOURCES[Resource_Key.SUPPRESS_VIEWPUNCH] = Resource(
     type = Resource_Type.PLUGIN,
     key = "suppress_viewpunch",
@@ -646,23 +665,6 @@ RESOURCES[Resource_Key.SUPPRESS_VIEWPUNCH] = Resource(
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "SuppressViewpunch.sp")
     ],
     include_paths = [],
-    download_info = None,
-    unpack_info = None
-)
-
-RESOURCES[Resource_Key.SYNCSTYLE] = Resource(
-    type = Resource_Type.PLUGIN,
-    key = "syncstyle",
-    name = "Syncstyle",
-    enabled = True,
-    install_dir = os.path.join(PLUGINS_DIR_PATH, "syncstyle"),
-    merge_paths = [],
-    plugin_paths = [
-        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "shavit-syncstyle.sp")
-    ],
-    include_paths = [
-        os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
-    ],
     download_info = None,
     unpack_info = None
 )
