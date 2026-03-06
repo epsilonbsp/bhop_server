@@ -172,6 +172,10 @@ Main ideas of `build.py` script
 
       https://github.com/rtldg/mpbhops_but_working
 
+* No Slide
+
+      Source: https://github.com/shavitush/noslide
+
 * Paint
 
       Source: https://github.com/epsilonbsp/sm_paint
