@@ -204,10 +204,14 @@ def compile_resource(resource: Resource) -> None:
                 include_paths.append(include_path)
 
         try:
+            print(f"Compiling: {input_path}...")
+
             subprocess.run(
                 [get_sourcemod_spcomp_path(), *include_paths, "-o", output_path, input_path],
                 check=True
             )
+
+            print("Compiled successfully!")
         except subprocess.CalledProcessError:
             sys.exit(1)
 
