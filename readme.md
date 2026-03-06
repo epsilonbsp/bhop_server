@@ -135,6 +135,10 @@ Main ideas of `build.py` script
 
       Source: https://github.com/epsilonbsp/sm_feet
 
+* Fun
+
+      Source: https://github.com/epsilonbsp/sm_fun
+
 * Gap
 
       Source: https://github.com/epsilonbsp/sm_gap
