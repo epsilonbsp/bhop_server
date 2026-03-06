@@ -204,7 +204,7 @@ Main ideas of `build.py` script
 
       Autosync: https://github.com/enimmy/shavit-syncstyle
       Doublejump: https://github.com/PMArkive/random-shavit-bhoptimer-stuff/blob/main/shavit-style-doublejump.sp
-      Parkour: https://github.com/PMArkive/random-shavit-bhoptimer-stuff/blob/main/parkour.sp
+      Parkour: https://github.com/PMArkive/random-shavit-bhoptimer-stuff/blob/main/shavit-parkourinflux.sp
 
 * Suppress Viewpunch
 
