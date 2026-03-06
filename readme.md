@@ -195,6 +195,11 @@ Main ideas of `build.py` script
 
       Source: https://github.com/ecsr/showtriggers
 
+* Sound Manager
+
+      Source: https://github.com/Haze1337/Sound-Manager
+      Release: https://github.com/Haze1337/Sound-Manager/archive/refs/tags/v1.0.5.zip
+
 * Suppress Viewpunch
 
       Source: https://github.com/xen-000/SuppressViewpunch
