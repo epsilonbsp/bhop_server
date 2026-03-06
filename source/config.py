@@ -641,9 +641,9 @@ RESOURCES[Resource_Key.STYLES] = Resource(
     install_dir = os.path.join(PLUGINS_DIR_PATH, "styles"),
     merge_paths = [],
     plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "autosync.sp"),
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "doublejump.sp"),
-        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "parkour.sp"),
-        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "syncstyle.sp")
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "parkour.sp")
     ],
     include_paths = [
         os.path.join(RESOURCES[Resource_Key.BHOPTIMER].install_dir, REL_SM_SCRIPTING_DIR_PATH, "include")
