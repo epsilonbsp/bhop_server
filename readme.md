@@ -152,6 +152,10 @@ Main ideas of `build.py` script
 
       Source: https://github.com/KawaiiClan/shavit-line-advanced
 
+* Linux File Lowercaser
+
+      Source: https://github.com/rtldg/linux_file_lowercaser
+
 * LJ Stats
 
       Source: https://github.com/KawaiiClan/LJStats
