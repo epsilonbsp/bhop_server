@@ -29,7 +29,7 @@ enum VelocityOverride
 
 public Plugin myinfo = {
 	name = "[shavit-style] Double Jump",
-	author = "Adam & Chanz",
+	author = "Adam & Chanz, EpsilonBSP",
 	description = "Adds a custom double jump style to shavit's bhoptimer.",
 	version = "1.1",
 	url = "https://github.com/strafe/shavit-style-doublejump"
@@ -114,14 +114,11 @@ Action HandleJumpingClient(int client, int &buttons)
 	if (iGroundEntity != -1)
 		g_iDoubleJumps[client] = 1;
 	
-	if ((buttons & IN_JUMP) == IN_JUMP && iGroundEntity == -1)
+	if ((buttons & IN_JUMP) == IN_JUMP && !(s_iLastButtons[client] & IN_JUMP) && iGroundEntity == -1)
 	{
-		// Originally this block was described as "perfect double jump".
-		float fVelocity[3];
-		GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", fVelocity);
+		// Double jump on fresh press regardless of vertical velocity.
 					
-		if (fVelocity[2] < 0.0)
-			DoubleJump(client);
+		DoubleJump(client);
 	}
 
 	s_iLastButtons[client] = buttons;
