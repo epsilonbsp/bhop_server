@@ -128,7 +128,7 @@ void DrawFeetRect(int client) {
     GetClientAbsOrigin(client, origin);
 
     float z = origin[2] + FEET_Z_OFFSET;
-    float s = FEET_RECT_SIZE;
+    float s = FEET_RECT_SIZE - FEET_BEAM_WIDTH / 2.0;
 
     float corners[4][3];
     corners[0][0] = origin[0] - s; corners[0][1] = origin[1] - s; corners[0][2] = z;
