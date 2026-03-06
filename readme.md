@@ -131,6 +131,10 @@ Main ideas of `build.py` script
       Source:  https://github.com/shavitush/bhoptimer
       Release: https://github.com/shavitush/bhoptimer/releases/download/v4.0.1/bhoptimer-v4.0.1.zip
 
+* Feet
+
+      Source: https://github.com/epsilonbsp/sm_feet
+
 * Gap
 
       Source: https://github.com/epsilonbsp/sm_gap
