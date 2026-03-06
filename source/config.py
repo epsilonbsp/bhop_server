@@ -101,6 +101,7 @@ class Resource_Key(IntEnum):
     RNGFIX = auto()
     SHOW_PLAYER_CLIPS = auto()
     SHOWTRIGGERS = auto()
+    SOUND_MANAGER = auto()
     SUPPRESS_VIEWPUNCH = auto()
     SYNCSTYLE = auto()
 
@@ -609,6 +610,23 @@ RESOURCES[Resource_Key.SHOWTRIGGERS] = Resource(
     merge_paths = [],
     plugin_paths = [
         os.path.join(REL_SM_SCRIPTING_DIR_PATH, "showtriggers.sp")
+    ],
+    include_paths = [],
+    download_info = None,
+    unpack_info = None
+)
+
+RESOURCES[Resource_Key.SOUND_MANAGER] = Resource(
+    type = Resource_Type.PLUGIN,
+    key = "sound_manager",
+    name = "Sound Manager",
+    enabled = True,
+    install_dir = os.path.join(PLUGINS_DIR_PATH, "sound_manager"),
+    merge_paths = [
+        REL_SM_GAMEDATA_DIR_PATH
+    ],
+    plugin_paths = [
+        os.path.join(REL_SM_SCRIPTING_DIR_PATH, "SoundManager.sp")
     ],
     include_paths = [],
     download_info = None,
