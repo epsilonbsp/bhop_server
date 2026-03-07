@@ -106,9 +106,9 @@ Main ideas of `build.py` script
 
 * ClosestPos
 
-      Source:  https://github.com/rtldg/sm_closestpos
-      Windows: https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-windows-latest-620269a.zip
-      Linux:   https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-ubuntu-22.04-f848dfc.zip
+      Source:  https://github.com/epsilonbsp/sm_closestpos
+      Windows: https://github.com/epsilonbsp/sm_closestpos/releases/download/v1.1.1/sm_closestpos_v1.1.1_windows.zip
+      Linux:   https://github.com/epsilonbsp/sm_closestpos/releases/download/v1.1.1/sm_closestpos_v1.1.1_linux.zip
 
 * Event Queue Fix Fix
 

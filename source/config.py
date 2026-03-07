@@ -248,11 +248,11 @@ RESOURCES[Resource_Key.CLOSESTPOS] = Resource(
     include_paths = [],
     download_info = resolve_download_info({
         OS_Type.WINDOWS: Download_Info(
-            "https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-windows-latest-620269a.zip",
+            "https://github.com/epsilonbsp/sm_closestpos/releases/download/v1.1.1/sm_closestpos_v1.1.1_windows.zip",
             os.path.join(DOWNLOADS_DIR_PATH, "closestpos.zip")
         ),
         OS_Type.LINUX: Download_Info(
-            "https://github.com/rtldg/sm_closestpos/releases/download/v1.1.1/sm_closestpos-sm1.10-ubuntu-22.04-f848dfc.zip",
+            "https://github.com/epsilonbsp/sm_closestpos/releases/download/v1.1.1/sm_closestpos_v1.1.1_linux.zip",
             os.path.join(DOWNLOADS_DIR_PATH, "closestpos.zip")
         )
     }),
