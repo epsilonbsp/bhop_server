@@ -67,6 +67,13 @@ def get_srcds_path() -> str:
 
     return os.path.join(SERVER_DIR_PATH, "srcds_run")
 
+# FastDL
+FASTDL_DIRS = {
+    "maps",
+    "materials",
+    "sound"
+}
+
 # Resources
 RESOURCES_DIR_PATH = os.path.join(BUILD_DIR_PATH, "resources")
 RESOURCES_CORE_DIR_PATH = os.path.join(RESOURCES_DIR_PATH, "core")

@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 # Copyright (C) 2026 EpsilonBSP
 
-import http.server
 import os
 import shutil
 import subprocess
@@ -264,33 +263,3 @@ def compile_one_resource(key: str) -> None:
             return
 
     print("ERROR: Specified resource doesn't exist.")
-
-def start_lan() -> None:
-    if not os.path.isdir(SERVER_DIR_PATH):
-        print("Server is not installed.")
-        sys.exit(1)
-
-    subprocess.run([
-        get_srcds_path(),
-        "-game", "cstrike",
-        "+map", "bhop_ambience",
-        "+sv_lan", "1",
-        "-maxplayers", "24",
-        "-insecure",
-        "-log",
-        "-console"
-    ])
-
-def start_fastdl() -> None:
-    if not os.path.isdir(CSTRIKE_DIR_PATH):
-        print("Server is not installed.")
-        sys.exit(1)
-
-    os.chdir(CSTRIKE_DIR_PATH)
-
-    port = 8080
-    handler = http.server.SimpleHTTPRequestHandler
-
-    with http.server.HTTPServer(("", port), handler) as httpd:
-        print(f"FastDL serving {CSTRIKE_DIR_PATH} on port {port}")
-        httpd.serve_forever()

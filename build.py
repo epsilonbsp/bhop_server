@@ -8,6 +8,7 @@ sys.pycache_prefix = os.path.join("build", "pycache")
 
 from source.install import *
 from source.os_type import *
+from source.start import *
 
 OS_TYPE = get_os_type()
 
