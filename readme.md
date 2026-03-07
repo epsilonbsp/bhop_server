@@ -20,7 +20,7 @@ This setup allows to just download or clone repo, run few commands and have loca
       python build.py install_all
 
       # Build plugins (if you make changes to plugins)
-      python build.py compile_resources
+      python build.py compile_all
 
       # Start server
       python build.py start_lan
