@@ -31,25 +31,25 @@ if command == "install_steamcmd":
     install_steamcmd()
 elif command == "install_server":
     install_server()
-elif command == "download_all_resources":
+elif command == "download_all_resources" or command == "download_all":
     download_all_resources()
-elif command == "download_resource":
+elif command == "download_resource" or command == "download":
     if not arg0:
         print("ERROR: Resource key not specified.")
         sys.exit(1)
 
     download_one_resource(arg0)
-elif command == "merge_all_resources":
+elif command == "merge_all_resources" or command == "merge_all":
     merge_all_resources()
-elif command == "merge_resource":
+elif command == "merge_resource" or command == "merge":
     if not arg0:
         print("ERROR: Resource key not specified.")
         sys.exit(1)
 
     merge_one_resource(arg0)
-elif command == "compile_all_resources":
+elif command == "compile_all_resources" or command == "comp_all":
     compile_all_resources()
-elif command == "compile_resource":
+elif command == "compile_resource" or command == "comp":
     if not arg0:
         print("ERROR: Resource key not specified.")
         sys.exit(1)
