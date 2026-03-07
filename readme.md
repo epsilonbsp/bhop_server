@@ -101,8 +101,9 @@ Main ideas of `build.py` script
 ### Extensions
 * Bzip2 Extension
 
-      Source: https://github.com/epsilonbsp/sm_bzip2
-      Both:   https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip
+      Source:  https://github.com/epsilonbsp/sm_bzip2
+      Windows: https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0_windows.zip
+      Linux:   https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0_linux.zip
 
 * ClosestPos
 

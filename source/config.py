@@ -227,8 +227,12 @@ RESOURCES[Resource_Key.BZIP2] = Resource(
     plugin_paths = [],
     include_paths = [],
     download_info = resolve_download_info({
-        get_os_type(): Download_Info(
-            "https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0.zip",
+        OS_Type.WINDOWS: Download_Info(
+            "https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0_windows.zip",
+            os.path.join(DOWNLOADS_DIR_PATH, "bzip2.zip")
+        ),
+        OS_Type.LINUX: Download_Info(
+            "https://github.com/epsilonbsp/sm_bzip2/releases/download/v1.0.0/sm_bzip2_v1.0.0_linux.zip",
             os.path.join(DOWNLOADS_DIR_PATH, "bzip2.zip")
         )
     }),
