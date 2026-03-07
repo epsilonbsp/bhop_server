@@ -21,7 +21,7 @@ def start_lan() -> None:
         "-game", "cstrike",
         "+map", "bhop_ambience",
         "+sv_lan", "1",
-        "-maxplayers", "24",
+        "-maxplayers", str(MAX_PLAYERS),
         "-insecure",
         "-log",
         "-console"

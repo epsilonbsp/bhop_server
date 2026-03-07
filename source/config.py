@@ -67,6 +67,8 @@ def get_srcds_path() -> str:
 
     return os.path.join(SERVER_DIR_PATH, "srcds_run")
 
+MAX_PLAYERS = 24
+
 # FastDL
 FASTDL_DIRS = {
     "maps",
