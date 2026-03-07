@@ -46,7 +46,7 @@ ConVar gCV_BeamMaterial;
 public Plugin myinfo =
 {
 	name = "Gap",
-	author = "ici, velocity calculation by Saul and implemented by Charles_(hypnos), some improvements by EpsilonBSP",
+	author = "ici, Nairda, velocity calculation by Saul and implemented by Charles_(hypnos), some improvements by EpsilonBSP",
 	description = "",
 	version = "1.2",
 	url = ""
@@ -260,7 +260,10 @@ public Action Cursor(Handle timer, int userid)
 
 		DrawRing(client, startPos, RING_START_RADIUS, RING_END_RADIUS, CURSOR_TIME, gI_ColorGreen, FBEAM_FADEIN);
 		DrawCursor(client, endPos, 1.0, CURSOR_TIME, gI_ColorWhite);
-		DrawLine(client, gF_PointPos[ client ][ POINT_A ], endPos, 1.0, CURSOR_TIME, gI_ColorWhite);
+
+		if (!gB_HasResult[client]) {
+			DrawLine(client, gF_PointPos[ client ][ POINT_A ], endPos, 1.0, CURSOR_TIME, gI_ColorWhite);
+		}
 	}
 
 	return Plugin_Continue;
