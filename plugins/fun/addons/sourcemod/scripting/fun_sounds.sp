@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright (C) 2026 EpsilonBSP
+// Copyright (C) 2026 epsilonbsp
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -27,7 +27,7 @@ Handle    g_hEnabledCookie;
 
 public Plugin myinfo = {
     name        = "Fun Sounds",
-    author      = "EpsilonBSP",
+    author      = "epsilonbsp",
     description = "Play fun sounds to all players from a shared library",
     version     = PLUGIN_VERSION,
     url         = "https://github.com/epsilonbsp/sm_fun"

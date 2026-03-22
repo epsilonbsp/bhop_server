@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright (C) 2026 EpsilonBSP
+// Copyright (C) 2026 epsilonbsp
 
 #include <sourcemod>
 #include <bzip2>
@@ -16,7 +16,7 @@ ArrayList g_MapList;
 
 public Plugin myinfo = {
     name = "Map Loader",
-    author = "EpsilonBSP",
+    author = "epsilonbsp",
     description = "Provides sm_loadmap command for downloading and loading maps on demand.",
     version = PLUGIN_VERSION,
     url = ""

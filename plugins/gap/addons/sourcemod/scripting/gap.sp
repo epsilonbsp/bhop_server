@@ -46,7 +46,7 @@ ConVar gCV_BeamMaterial;
 public Plugin myinfo =
 {
 	name = "Gap",
-	author = "ici, Nairda, velocity calculation by Saul and implemented by Charles_(hypnos), some improvements by EpsilonBSP",
+	author = "ici, Nairda, velocity calculation by Saul and implemented by Charles_(hypnos), some improvements by epsilonbsp",
 	description = "",
 	version = "1.2",
 	url = ""

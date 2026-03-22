@@ -29,7 +29,7 @@ enum VelocityOverride
 
 public Plugin myinfo = {
 	name = "[shavit-style] Double Jump",
-	author = "Adam & Chanz, EpsilonBSP",
+	author = "Adam & Chanz, epsilonbsp",
 	description = "Adds a custom double jump style to shavit's bhoptimer.",
 	version = "1.1",
 	url = "https://github.com/strafe/shavit-style-doublejump"

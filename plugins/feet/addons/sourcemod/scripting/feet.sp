@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright (C) 2026 EpsilonBSP
+// Copyright (C) 2026 epsilonbsp
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -37,7 +37,7 @@ Handle g_hFeetCookie;
 
 public Plugin myinfo = {
     name        = "Feet",
-    author      = "EpsilonBSP",
+    author      = "epsilonbsp",
     description = "Renders a wireframe rectangle at player feet",
     version     = PLUGIN_VERSION,
     url         = "https://github.com/epsilonbsp/sm_feet"
